@@ -1,0 +1,339 @@
+{
+  "id": "ch4",
+  "title": "The Anti-Derivative",
+  "subtitle": "Integration and the Reverse of Change",
+  "sections": [
+    {
+      "id": "ch4-sec1",
+      "title": "Integration — The Reverse of Differentiation",
+      "subsections": [
+        {
+          "id": "ch4-sec1-intuition",
+          "type": "intuition",
+          "label": "Intuition First",
+          "heading": "What is an Anti-Derivative?",
+          "body": "In the previous chapters, we learned how to find the derivative — the exact, instantaneous rate of change of a function. But what if we want to go in reverse? What if we already know the rate of change, and we want to figure out what the original function was? This reverse process is called finding the anti-derivative, and it represents the second major operation of calculus: integration.",
+          "analogy": {
+            "title": "The Bank Account & Speedometer Analogies",
+            "body": "Bank Account: Imagine you run a business and record only the daily changes to your account — deposits and withdrawals. Someone hands you this long list of daily changes and asks: 'What is the total balance?' You must add up, or accumulate, all those daily changes to reconstruct the running total. Finding the anti-derivative is exactly this — recovering total accumulation from a record of its changes.\n\nOdometer vs. Speedometer: If differentiation is reading your odometer (total distance) to calculate what the speedometer (velocity) reads, then integration is reading the speedometer history to figure out how far your car has traveled total.\n\nKey relationship: If F'(x) = f(x), then F(x) is the anti-derivative of f(x), and we write ∫f(x)dx = F(x) + C.",
+            "keyPoints": [
+              "Integration is the reverse of differentiation — given the rate of change, find the original function.",
+              "The +C (constant of integration) exists because any constant's derivative is zero — you lose vertical shift information when differentiating.",
+              "To check any integral result: take its derivative — you should get the original integrand back.",
+              "Power Rule for Integrals: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C  (for n ≠ -1)."
+            ]
+          }
+        },
+        {
+          "id": "ch4-sec1-concepts",
+          "type": "concepts",
+          "label": "Formal Concepts",
+          "heading": "Formal Concepts & Definitions",
+          "definitions": [
+            {
+              "term": "Anti-Derivative F(x)",
+              "definition": "A function F(x) whose derivative equals the given function f(x). That is, F'(x) = f(x). Every continuous function has infinitely many anti-derivatives, all differing by a constant."
+            },
+            {
+              "term": "Indefinite Integral ∫f(x)dx",
+              "definition": "The entire family of anti-derivatives of f(x), written ∫f(x)dx = F(x) + C. The ∫ symbol (an elongated S for 'sum') denotes the operation; dx specifies the variable of integration."
+            },
+            {
+              "term": "Constant of Integration +C",
+              "definition": "An arbitrary constant added to every indefinite integral. Because the derivative of any constant is zero, integration cannot recover the original vertical position of a function without extra information. +C represents all possible vertical shifts."
+            },
+            {
+              "term": "Power Rule for Integrals",
+              "definition": "∫xⁿ dx = xⁿ⁺¹/(n+1) + C, valid for any n ≠ -1. Reverse of the derivative power rule: add 1 to the exponent, then divide by that new exponent."
+            },
+            {
+              "term": "Logarithm Rule (n = -1)",
+              "definition": "∫x⁻¹ dx = ∫(1/x) dx = ln|x| + C. The power rule breaks down at n = -1 (division by zero). The anti-derivative of 1/x is the natural logarithm. The absolute value ensures validity for negative x."
+            },
+            {
+              "term": "Exponential Rule",
+              "definition": "∫eˣ dx = eˣ + C. The exponential function is its own derivative — and therefore also its own anti-derivative. Uniquely self-referential."
+            },
+            {
+              "term": "Trigonometric Rules",
+              "definition": "∫cos(x) dx = sin(x) + C. ∫sin(x) dx = -cos(x) + C. Reverse the differentiation rules: derivative of sin is cos (so integral of cos is sin); derivative of cos is -sin (so integral of sin is -cos)."
+            },
+            {
+              "term": "Constant Multiple Rule",
+              "definition": "∫k·f(x) dx = k·∫f(x) dx. A constant multiplier passes through the integral sign unchanged."
+            },
+            {
+              "term": "Sum / Difference Rule",
+              "definition": "∫[f(x) ± g(x)] dx = ∫f(x)dx ± ∫g(x)dx. Integration distributes over addition and subtraction — integrate term by term."
+            },
+            {
+              "term": "Initial Value Problem",
+              "definition": "When you know F'(x) = f(x) and one specific point (e.g. F(0) = 5), you can integrate to get F(x) = ∫f(x)dx + C, then substitute the known point to solve for the exact value of C, eliminating the ambiguity of the +C."
+            },
+            {
+              "term": "Accumulation Function",
+              "definition": "An anti-derivative can be viewed as A(x) = ∫ₐˣ f(t) dt — the running total of signed area accumulated under the curve of f from a fixed starting point a up to x. This connects indefinite integrals to the geometric area interpretation."
+            }
+          ]
+        },
+        {
+          "id": "ch4-sec1-examples",
+          "type": "examples",
+          "label": "Examples",
+          "heading": "Step-by-Step Examples",
+          "examples": [
+            {
+              "level": "Basic",
+              "title": "Reversing the Power Rule: ∫x² dx",
+              "problem": "Find the indefinite integral of f(x) = x².",
+              "steps": [
+                "Identify the power: n = 2.",
+                "Apply Power Rule for integrals — add 1 to the exponent: 2 + 1 = 3.",
+                "Divide by the new exponent: (1/3)x³.",
+                "Add the constant of integration: (1/3)x³ + C.",
+                "Verify by differentiating: d/dx[(1/3)x³ + C] = (1/3)·3x² = x². ✓"
+              ],
+              "result": "∫x² dx = (1/3)x³ + C"
+            },
+            {
+              "level": "Intermediate",
+              "title": "Polynomial Integration with Sum Rule",
+              "problem": "Evaluate ∫(5x⁴ + 3x² + 2x + 4) dx.",
+              "steps": [
+                "Apply the Sum Rule: integrate each term separately.",
+                "∫5x⁴ dx = 5·(x⁵/5) = x⁵",
+                "∫3x² dx = 3·(x³/3) = x³",
+                "∫2x dx = 2·(x²/2) = x²",
+                "∫4 dx = 4x  (since 4 = 4x⁰, power rule gives 4x¹/1)",
+                "Combine all terms and add one single +C at the end."
+              ],
+              "result": "∫(5x⁴ + 3x² + 2x + 4) dx = x⁵ + x³ + x² + 4x + C"
+            },
+            {
+              "level": "Advanced",
+              "title": "Negative Exponents and the Logarithm Rule",
+              "problem": "Evaluate ∫(4x³ + x⁻² + 5/x) dx.",
+              "steps": [
+                "Separate using Sum Rule: ∫4x³ dx + ∫x⁻² dx + ∫5x⁻¹ dx.",
+                "∫4x³ dx: add 1 to exponent (→4), divide by 4: 4·(x⁴/4) = x⁴.",
+                "∫x⁻² dx: n = -2, add 1 (→-1), divide by -1: x⁻¹/(-1) = -1/x.",
+                "∫5x⁻¹ dx: n = -1, power rule FAILS (division by 0). Use Logarithm Rule: 5·ln|x|.",
+                "Combine all terms and add +C."
+              ],
+              "result": "∫(4x³ + x⁻² + 5/x) dx = x⁴ - 1/x + 5·ln|x| + C"
+            }
+          ]
+        },
+        {
+          "id": "ch4-sec1-visual",
+          "type": "visual",
+          "label": "Visual",
+          "heading": "Visual Understanding — The Family of Curves",
+          "graph": {
+            "type": "integral",
+            "defaultExpression": "x^2",
+            "xRange": [-3, 3],
+            "yRange": [-2, 10],
+            "limitA": 0,
+            "limitB": 2,
+            "label": "f(x) = x²"
+          },
+          "visualNotes": [
+            "Why +C? Three parabolas — x², x²+2, x²-4 — all have identical slope at every x value. Integration sees only slope, never the starting height. +C captures all possible vertical shifts.",
+            "Absolute value in logarithms: f(x) = 1/x exists for both positive and negative x, but ln(x) is only defined for positive x. Writing ln|x| mirrors the logarithm across the y-axis, making the anti-derivative valid everywhere the original function is.",
+            "Accumulation interpretation: The shaded area under f(x) from a to b in the graph IS the value F(b) - F(a). Drag the sliders to see how the Riemann sum converges to the exact area as n increases.",
+            "Verification test: If you differentiate your integral result and get back the original function, the integration is correct."
+          ]
+        },
+        {
+          "id": "ch4-sec1-code",
+          "type": "code",
+          "label": "Python",
+          "heading": "Python / Computational Section",
+          "snippets": [
+            {
+              "title": "Basic Integration",
+              "code": "from sympy import symbols, integrate, cos, exp, sin, ln\n\nx = symbols('x')\n\n# Anti-derivative of cos(x)\nprint(\"∫cos(x) =\", integrate(cos(x), x))  # sin(x)\n\n# Anti-derivative of x^2\nprint(\"∫x^2   =\", integrate(x**2, x))      # x^3/3\n\n# Anti-derivative of e^x\nprint(\"∫e^x   =\", integrate(exp(x), x))    # e^x\n\n# Anti-derivative of 1/x\nprint(\"∫1/x   =\", integrate(1/x, x))       # log(x)\n# Note: SymPy uses log() for natural log\n# IMPORTANT: SymPy does NOT add +C automatically!"
+            },
+            {
+              "title": "Complex Expressions",
+              "code": "from sympy import symbols, integrate\n\nx = symbols('x')\n\n# Polynomial with negative exponents\nexpr = 4*x**3 + x**(-2) + 5/x\nresult = integrate(expr, x)\nprint(\"Result:\", result)\n# Output: x**4 + 5*log(x) - 1/x\n# (Remember to add +C mentally)\n\n# Verify by differentiating\nfrom sympy import diff\ncheck = diff(result, x)\nprint(\"Derivative check:\", check)  # Should equal original expr\nprint(\"Match:\", check.equals(expr))"
+            },
+            {
+              "title": "Initial Value Problems",
+              "code": "from sympy import symbols, integrate, Eq, solve\n\nx, C = symbols('x C')\nf = 2*x  # given: F'(x) = 2x\n\n# Step 1: find general anti-derivative\nF_general = integrate(f, x) + C  # x^2 + C\nprint(\"General:  F(x) =\", F_general)\n\n# Step 2: apply initial condition F(1) = 10\neq = Eq(F_general.subs(x, 1), 10)\nC_val = solve(eq, C)[0]          # C = 9\nprint(\"Solved C =\", C_val)\n\n# Step 3: specific solution\nF_specific = F_general.subs(C, C_val)\nprint(\"Specific: F(x) =\", F_specific)  # x^2 + 9\n\n# Physics: falling object\ng_const = -9.8\nv = integrate(g_const, x)     # v(t) = -9.8t (symbolic)\nprint(\"v(t) =\", v, \"+ C\")\nprint(\"With v(0)=0: C=0, so v(t) =\", v)"
+            }
+          ]
+        },
+        {
+          "id": "ch4-sec1-quiz",
+          "type": "quiz",
+          "label": "Quiz",
+          "heading": "Quiz",
+          "questions": [
+            {
+              "id": "q1",
+              "text": "What is ∫x⁵ dx?",
+              "options": [
+                "5x⁴ + C",
+                "x⁶/6 + C",
+                "x⁶ + C",
+                "x⁴/4 + C"
+              ],
+              "correct": 1,
+              "explanation": "Power Rule for integrals: add 1 to the exponent (5+1=6), divide by the new exponent: x⁶/6 + C. Quick check: d/dx[x⁶/6] = 6x⁵/6 = x⁵. ✓"
+            },
+            {
+              "id": "q2",
+              "text": "Why do we write ∫(1/x)dx = ln|x| + C and not ln(x) + C?",
+              "options": [
+                "It is just a notational convention with no mathematical meaning",
+                "Because 1/x is defined for negative x, but ln(x) is not — the absolute value extends validity to the full domain",
+                "Because ln|x| is easier to compute than ln(x)",
+                "There is no difference; both expressions are equivalent"
+              ],
+              "correct": 1,
+              "explanation": "The function 1/x is defined and continuous for all x ≠ 0, including negative x. But ln(x) is only defined for positive x. Writing ln|x| mirrors the logarithm across the y-axis, making the anti-derivative valid on the full domain of 1/x."
+            },
+            {
+              "id": "q3",
+              "text": "What is ∫eˣ dx?",
+              "options": [
+                "eˣ⁺¹/(x+1) + C",
+                "x·eˣ + C",
+                "eˣ + C",
+                "e + C"
+              ],
+              "correct": 2,
+              "explanation": "eˣ is its own derivative — and therefore also its own anti-derivative. ∫eˣ dx = eˣ + C. Never apply the power rule to exponential functions where the exponent contains the variable."
+            },
+            {
+              "id": "q4",
+              "text": "You integrate f(x) = 6x and get F(x) = 3x². A friend says the answer is 3x² + 7. Who is right?",
+              "options": [
+                "You are right — 3x² is the only correct answer",
+                "Your friend is right — 7 is the correct constant",
+                "Both of you — 3x² + C includes 3x² + 7 as one specific case",
+                "Neither — the correct answer is 6x²"
+              ],
+              "correct": 2,
+              "explanation": "Both answers are members of the same family F(x) = 3x² + C. Without an initial condition, you cannot determine the specific value of C. 3x² + 7 is valid (C=7), 3x² is valid (C=0), and infinitely many others are too."
+            },
+            {
+              "id": "q5",
+              "text": "A falling object has acceleration a(t) = -9.8 m/s² and starts from rest v(0) = 0. What is v(t)?",
+              "options": [
+                "v(t) = -9.8t²/2",
+                "v(t) = -9.8",
+                "v(t) = -9.8t",
+                "v(t) = -9.8t + 9.8"
+              ],
+              "correct": 2,
+              "explanation": "Integrate a(t) = -9.8: v(t) = -9.8t + C. Apply initial condition v(0) = 0: -9.8(0) + C = 0 → C = 0. Therefore v(t) = -9.8t. The object accelerates downward (negative direction) linearly with time."
+            }
+          ]
+        },
+        {
+          "id": "ch4-sec1-practice",
+          "type": "practice",
+          "label": "Practice",
+          "heading": "Practice Problems",
+          "problems": [
+            {
+              "level": "Easy",
+              "label": "Concept Check",
+              "problem": "Find the indefinite integral: ∫7x² dx.",
+              "hint": "Use the Constant Multiple Rule to pull out 7, then apply the Power Rule (n=2).",
+              "solution": "7·∫x² dx = 7·(x³/3) = 7x³/3 + C.\nVerify: d/dx[7x³/3] = 7·(3x²/3) = 7x². ✓"
+            },
+            {
+              "level": "Medium",
+              "label": "Application",
+              "problem": "Find the indefinite integral: ∫(x^(2/3) + 7x) dx.",
+              "hint": "Apply the Power Rule to each term. For x^(2/3): n = 2/3, so n+1 = 5/3. Dividing by 5/3 is the same as multiplying by 3/5.",
+              "solution": "∫x^(2/3) dx: add 1 to get 5/3, divide by 5/3 → multiply by 3/5: (3/5)x^(5/3).\n∫7x dx: 7·(x²/2) = 7x²/2.\nCombine: (3x^(5/3))/5 + 7x²/2 + C."
+            },
+            {
+              "level": "Hard",
+              "label": "Thinking-Based",
+              "problem": "Integrate: ∫(4/x² + 3/x + 2x) dx.",
+              "hint": "Rewrite fractions with negative exponents: 4/x² = 4x⁻², 3/x = 3x⁻¹. Power rule works on the first, but the Logarithm Rule is needed for 3x⁻¹.",
+              "solution": "Rewrite: ∫(4x⁻² + 3x⁻¹ + 2x) dx.\n∫4x⁻² dx: n=-2, add 1 → -1, divide by -1: 4·(x⁻¹/(-1)) = -4/x.\n∫3x⁻¹ dx: n=-1, use log rule: 3·ln|x|.\n∫2x dx: 2·(x²/2) = x².\nAnswer: -4/x + 3·ln|x| + x² + C."
+            },
+            {
+              "level": "Real-World",
+              "label": "Physics",
+              "problem": "A ball is dropped from rest off a cliff. Its acceleration due to gravity is a(t) = -9.8 m/s². Initial velocity v(0) = 0. Find the velocity function v(t).",
+              "hint": "Velocity is the anti-derivative of acceleration. Integrate a(t), then use v(0)=0 to solve for C.",
+              "solution": "v(t) = ∫a(t) dt = ∫-9.8 dt = -9.8t + C.\nApply initial condition: v(0) = -9.8(0) + C = 0 → C = 0.\nv(t) = -9.8t m/s.\nThe negative sign means the ball moves downward. After 3 seconds, v(3) = -29.4 m/s."
+            }
+          ]
+        },
+        {
+          "id": "ch4-sec1-mistakes",
+          "type": "mistakes",
+          "label": "Common Mistakes",
+          "heading": "Common Mistakes & Misconceptions",
+          "mistakes": [
+            {
+              "title": "Forgetting +C",
+              "description": "The most universal mistake in integral calculus. Students successfully reverse the power rule but stop without +C, providing only one specific function out of an infinitely large family. Without +C, solving initial value problems is impossible — you have no free parameter to match the given condition."
+            },
+            {
+              "title": "Applying Power Rule When n = -1",
+              "description": "When faced with ∫x⁻¹ dx, students blindly apply the power rule and get x⁰/0 — undefined catastrophe. You must recognise that 1/x is the special exception: its anti-derivative is ln|x|, not a power function. Watch for any integral with 1/x or x⁻¹."
+            },
+            {
+              "title": "Omitting the Absolute Value in ln|x|",
+              "description": "Writing ∫(1/x)dx = ln(x) + C is technically incomplete. Since 1/x is valid for negative x but ln(x) is not, omitting the absolute value breaks the anti-derivative for half its domain. Always write ln|x|."
+            },
+            {
+              "title": "Treating Integration and Differentiation as Unrelated",
+              "description": "They are exact inverse operations. The fastest way to check any integral: differentiate your result — you must recover the original integrand. If d/dx[your answer] ≠ original function, the integration is wrong. This self-checking habit prevents almost every integration error."
+            }
+          ]
+        },
+        {
+          "id": "ch4-sec1-advanced",
+          "type": "advanced",
+          "label": "Advanced Insights",
+          "heading": "Advanced Insights",
+          "insights": [
+            {
+              "title": "Initial Value Problems and Differential Equations",
+              "body": "The process of integrating F'(x) = f(x) to get F(x) = ∫f(x)dx + C, then using a known point to solve for C, is the foundational method for solving differential equations. When you write dy/dx = f(x) and integrate both sides, you are solving a first-order ordinary differential equation (ODE). This connects anti-derivatives directly to the modelling of physical systems — population growth, radioactive decay, heat flow — all governed by such equations."
+            },
+            {
+              "title": "The Accumulation Function",
+              "body": "An anti-derivative can be formally defined as an accumulation function: A(x) = ∫ₐˣ f(t) dt. The value A(x) is literally the running total of signed area accumulated under the graph of f from a fixed starting point a up to x. This is the key bridge between the algebraic definition of integration (finding anti-derivatives) and the geometric definition (measuring area under curves) — and it is the content of the Fundamental Theorem of Calculus."
+            }
+          ]
+        },
+        {
+          "id": "ch4-sec1-applications",
+          "type": "applications",
+          "label": "Real-World",
+          "heading": "Real-World Applications",
+          "applications": [
+            {
+              "field": "Physics (Motion from Acceleration)",
+              "description": "Given a planet's gravitational acceleration profile, integrate once to get velocity, integrate again to get position. This is how mission planners compute spacecraft trajectories from known thrust profiles."
+            },
+            {
+              "field": "Economics (Total Cost from Marginal Cost)",
+              "description": "Marginal cost C'(x) is the derivative of total cost. If economists only have marginal cost data, they integrate it to reconstruct the master Total Cost function — the foundation of pricing strategy and profit optimisation."
+            },
+            {
+              "field": "Data Science (Sensor Integration)",
+              "description": "Gyroscopes and accelerometers measure rate-of-change (angular velocity, linear acceleration). Data scientists integrate this telemetry stream to reconstruct position, orientation, and displacement — used in drone navigation, phone gesture recognition, and self-driving vehicles."
+            },
+            {
+              "field": "Engineering (Differential Equations)",
+              "description": "Basic ODEs like dy/dt = ky model radioactive decay (k < 0), bacterial growth in a bioreactor (k > 0), and capacitor charging in circuits. Integration solves these equations, giving engineers the complete time-evolution of the system from initial conditions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

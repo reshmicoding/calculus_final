@@ -1,0 +1,326 @@
+{
+  "id": "ch6",
+  "title": "The Fundamental Theorem of Calculus",
+  "subtitle": "The Bridge Between Slopes and Areas",
+  "sections": [
+    {
+      "id": "ch6-sec1",
+      "title": "The Fundamental Theorem of Calculus",
+      "subsections": [
+        {
+          "id": "ch6-sec1-intuition",
+          "type": "intuition",
+          "label": "Intuition First",
+          "heading": "The Bridge Between Two Worlds",
+          "body": "Until now, calculus has been divided into two separate halves. Differential calculus is about finding the instantaneous rate of change — the derivative, the slope. Integral calculus is about finding the total accumulation — the definite integral, the area under a curve — by adding up infinitely many infinitely thin slices. The Fundamental Theorem of Calculus (FTC) is the mathematical miracle that proves these two completely different geometric concepts — slopes and areas — are exact opposites of each other.",
+          "analogy": {
+            "title": "The Bank Account & Odometer Analogies",
+            "body": "Bank Account: You record only the daily changes to your account — deposits and withdrawals. To find the total net change between Day 10 and Day 30, you have two choices:\n\n1. The Hard Way (Riemann Sums): Add up all the individual daily changes over 20 days.\n2. The Easy Way (FTC): Take the running balance on Day 30 and subtract the balance on Day 10. The difference IS the total accumulated change.\n\nOdometer vs. Speedometer: Your speedometer measures instantaneous rate of change (velocity v). Your odometer measures accumulated total distance. To find how far you drove between 2pm and 4pm, you do not integrate the speedometer — you simply read the odometer at 4pm and subtract the reading at 2pm. The area under the velocity curve EQUALS the difference in distance readings.",
+            "keyPoints": [
+              "FTC Part 1: d/dx[∫ₐˣ f(t)dt] = f(x). Differentiating an accumulation integral recovers the original function.",
+              "FTC Part 2: ∫ₐᵇ f(x)dx = F(b) - F(a). Compute area by evaluating the anti-derivative at the two boundaries.",
+              "The +C cancels in definite integrals: (F(b)+C) - (F(a)+C) = F(b) - F(a). Never add +C to a definite integral.",
+              "Mean Value Theorem for Integrals: Average value = (1/(b-a))·∫ₐᵇ f(x)dx = f(c) for some c in [a,b]."
+            ]
+          }
+        },
+        {
+          "id": "ch6-sec1-concepts",
+          "type": "concepts",
+          "label": "Formal Concepts",
+          "heading": "Formal Concepts & Definitions",
+          "definitions": [
+            {
+              "term": "Accumulation Function A(x)",
+              "definition": "A(x) = ∫ₐˣ f(t)dt. Measures the running total of signed area under f(t) from a fixed starting point a up to a variable point x. The output changes as x moves — it is a function, not a number."
+            },
+            {
+              "term": "FTC Part 1 — Differentiation Undoes Integration",
+              "definition": "d/dx[∫ₐˣ f(t)dt] = f(x). The derivative of the accumulation function is the original integrand evaluated at x. The rate at which area accumulates at x is exactly the height of the curve at x."
+            },
+            {
+              "term": "FTC Part 1 with Chain Rule",
+              "definition": "If the upper limit is a function g(x) rather than x itself, the Chain Rule applies: d/dx[∫ₐᵍ⁽ˣ⁾ f(t)dt] = f(g(x))·g'(x). Evaluate f at the upper boundary, then multiply by the derivative of that boundary."
+            },
+            {
+              "term": "FTC Part 2 — Evaluation Theorem",
+              "definition": "∫ₐᵇ f(x)dx = F(b) - F(a), where F is any anti-derivative of f. The exact area is computed by evaluating the anti-derivative at the two boundary points and subtracting. Written with bracket notation: F(x)|ₐᵇ = F(b) - F(a)."
+            },
+            {
+              "term": "Bracket Notation F(x)|ₐᵇ",
+              "definition": "Shorthand for F(b) - F(a). After finding the anti-derivative F(x), write it inside square brackets with the limits as subscript and superscript, then evaluate upper minus lower."
+            },
+            {
+              "term": "+C Cancellation in Definite Integrals",
+              "definition": "The constant of integration always cancels in definite integrals: [F(b)+C] - [F(a)+C] = F(b) - F(a). Never include +C when evaluating a definite integral — it is both unnecessary and clutter."
+            },
+            {
+              "term": "Mean Value Theorem for Integrals",
+              "definition": "For a continuous f on [a,b], there exists at least one c in [a,b] such that f(c) = (1/(b-a))·∫ₐᵇ f(x)dx. The function must attain its average value at some specific point — the geometric 'equal area' rectangle."
+            },
+            {
+              "term": "Average Value of a Function",
+              "definition": "f_avg = (1/(b-a))·∫ₐᵇ f(x)dx. The height of the rectangle that has the same area as the region under the curve over [a,b]. Analogous to the arithmetic mean but for a continuous function."
+            },
+            {
+              "term": "The Discontinuity Trap",
+              "definition": "FTC Part 2 requires f to be continuous on ALL of [a,b]. If f has a vertical asymptote inside [a,b], the theorem is invalid. Blindly applying F(b)-F(a) can yield a nonsensical result — like a negative area for a strictly positive function."
+            }
+          ]
+        },
+        {
+          "id": "ch6-sec1-examples",
+          "type": "examples",
+          "label": "Examples",
+          "heading": "Step-by-Step Examples",
+          "examples": [
+            {
+              "level": "Basic",
+              "title": "Evaluating a Definite Integral via FTC Part 2",
+              "problem": "Find the exact area under f(x) = x² between x = 1 and x = 4.",
+              "steps": [
+                "Find the anti-derivative of x²: F(x) = x³/3.",
+                "Evaluate at the upper bound b = 4: F(4) = 4³/3 = 64/3.",
+                "Evaluate at the lower bound a = 1: F(1) = 1³/3 = 1/3.",
+                "Subtract: F(4) - F(1) = 64/3 - 1/3 = 63/3 = 21.",
+                "No +C needed — it cancels out in F(b) - F(a)."
+              ],
+              "result": "∫₁⁴ x² dx = 21"
+            },
+            {
+              "level": "Intermediate",
+              "title": "Trigonometric Definite Integral",
+              "problem": "Evaluate ∫₀^(π/2) sin(t) dt.",
+              "steps": [
+                "Anti-derivative of sin(t) is -cos(t).",
+                "Set up evaluation: [-cos(t)]₀^(π/2).",
+                "Evaluate at upper bound t = π/2: -cos(π/2) = -0 = 0.",
+                "Evaluate at lower bound t = 0: -cos(0) = -1.",
+                "Subtract: 0 - (-1) = 1."
+              ],
+              "result": "∫₀^(π/2) sin(t) dt = 1"
+            },
+            {
+              "level": "Advanced",
+              "title": "FTC Part 1 with Chain Rule (Variable Upper Bound)",
+              "problem": "Find dA/dx for A(x) = ∫₀^(x³) cos(t) dt.",
+              "steps": [
+                "FTC Part 1 says d/dx[∫ₐˣ f(t)dt] = f(x). But our upper bound is x³, not x.",
+                "Apply the Chain Rule version: d/dx[∫ₐᵍ⁽ˣ⁾ f(t)dt] = f(g(x)) · g'(x).",
+                "Evaluate f(t) = cos(t) at the upper boundary g(x) = x³: cos(x³).",
+                "Multiply by the derivative of the upper boundary: d/dx[x³] = 3x².",
+                "Result: dA/dx = cos(x³) · 3x²."
+              ],
+              "result": "dA/dx = 3x² cos(x³)"
+            }
+          ]
+        },
+        {
+          "id": "ch6-sec1-visual",
+          "type": "visual",
+          "label": "Visual",
+          "heading": "Visual Understanding — The Accumulation Function",
+          "graph": {
+            "type": "integral",
+            "defaultExpression": "x^2",
+            "xRange": [0, 4.5],
+            "yRange": [-1, 18],
+            "limitA": 1,
+            "limitB": 4,
+            "label": "f(x) = x²"
+          },
+          "visualNotes": [
+            "Geometry of Part 1: Increase x by a tiny Δx — the new strip of area added is approximately f(x)·Δx. So ΔA/Δx ≈ f(x). As Δx→0, A'(x) = f(x) exactly. Area growth rate = curve height.",
+            "Concavity and Accumulation: Where f(x) > 0, A(x) is increasing. Where f(x) < 0, A(x) is decreasing. Where f(x) = 0, A(x) has a local max or min. The accumulation function mirrors the behavior of its integrand.",
+            "FTC Part 2 shortcut: Instead of summing millions of Riemann rectangles, evaluate F(b) - F(a). The exact same answer in two evaluations vs. infinite summation.",
+            "Average value: The Mean Value Theorem for Integrals guarantees a rectangle of height f(c) with the exact same area as the curved region. Move the slider to see where this 'equal area' point c falls."
+          ]
+        },
+        {
+          "id": "ch6-sec1-code",
+          "type": "code",
+          "label": "Python",
+          "heading": "Python / Computational Section",
+          "snippets": [
+            {
+              "title": "Symbolic Definite Integration",
+              "code": "from sympy import symbols, integrate, cos, sin, sqrt\n\nx = symbols('x')\n\n# FTC Part 2: ∫₋₁¹ cos(x) dx\nresult1 = cos(x).integrate((x, -1, 1))\nprint(\"∫₋₁¹ cos(x) dx =\", result1)         # 2*sin(1)\nprint(\"Decimal:\", result1.evalf(4))           # 1.683\n\n# ∫₁⁴ x² dx\nresult2 = integrate(x**2, (x, 1, 4))\nprint(\"\\n∫₁⁴ x² dx =\", result2)              # 21\n\n# ∫₀^(π/2) sin(x) dx\nfrom sympy import pi\nresult3 = integrate(sin(x), (x, 0, pi/2))\nprint(\"∫₀^(π/2) sin(x) dx =\", result3)       # 1\n\n# ∫₁⁹ 1/√x dx\nresult4 = integrate(1/sqrt(x), (x, 1, 9))\nprint(\"∫₁⁹ x^(-1/2) dx =\", result4)          # 4"
+            },
+            {
+              "title": "Average Value of a Function",
+              "code": "from sympy import symbols, integrate\n\nx = symbols('x')\nf = 3 * x**2\na, b = 0, 2\n\n# Average value = (1/(b-a)) * integral\ntotal_area   = integrate(f, (x, a, b))\naverage_val  = (1 / (b - a)) * total_area\n\nprint(f\"Total area under 3x² on [0,2]: {total_area}\")\nprint(f\"Average value of 3x² on [0,2]: {average_val}\")\n# Output: 4\n# Verify: 3c² = 4 → c² = 4/3 → c = 2/√3 ≈ 1.155 ∈ [0,2] ✓\n\nimport sympy as sp\nc = sp.Symbol('c', positive=True)\nmvt_point = sp.solve(3*c**2 - average_val, c)\nprint(f\"MVT point c = {float(mvt_point[0]):.4f}\")"
+            },
+            {
+              "title": "FTC Part 1 — Symbolic Derivative of Integral",
+              "code": "from sympy import symbols, integrate, cos, diff\n\nx, t = symbols('x t')\n\n# A(x) = ∫₀ˣ cos(t) dt\nA_x = integrate(cos(t), (t, 0, x))\nprint(\"A(x) = ∫₀ˣ cos(t)dt =\", A_x)  # sin(x)\n\n# Verify FTC Part 1: dA/dx should equal cos(x)\ndA_dx = diff(A_x, x)\nprint(\"A'(x) =\", dA_dx)                # cos(x) ✓\n\n# Chain Rule case: A(x) = ∫₀^(x³) cos(t)dt\n# dA/dx = cos(x³) * 3x²\nA_chain = integrate(cos(t), (t, 0, x**3))\ndA_chain = diff(A_chain, x)\nprint(\"\\nA(x) = ∫₀^(x³) cos(t)dt:\")\nprint(\"A'(x) =\", dA_chain.simplify())  # 3x²cos(x³)"
+            }
+          ]
+        },
+        {
+          "id": "ch6-sec1-quiz",
+          "type": "quiz",
+          "label": "Quiz",
+          "heading": "Quiz",
+          "questions": [
+            {
+              "id": "q1",
+              "text": "FTC Part 1 states that d/dx[∫ₐˣ f(t)dt] = ?",
+              "options": [
+                "F(x) - F(a)",
+                "f(x)",
+                "f(a)",
+                "∫f(x)dx"
+              ],
+              "correct": 1,
+              "explanation": "FTC Part 1: the derivative of the accumulation function is the original integrand evaluated at x. d/dx[∫ₐˣ f(t)dt] = f(x). The integral and derivative cancel — they are inverse operations."
+            },
+            {
+              "id": "q2",
+              "text": "Evaluate ∫₁⁴ (2x + 3) dx using FTC Part 2.",
+              "options": [
+                "28",
+                "20",
+                "24",
+                "32"
+              ],
+              "correct": 2,
+              "explanation": "F(x) = x² + 3x. F(4) = 16 + 12 = 28. F(1) = 1 + 3 = 4. Result: 28 - 4 = 24."
+            },
+            {
+              "id": "q3",
+              "text": "When evaluating a definite integral ∫ₐᵇ f(x)dx, should you include +C in F(x)?",
+              "options": [
+                "Yes — always include +C to be complete",
+                "Only if f(x) is a polynomial",
+                "No — the +C cancels when you subtract F(b) - F(a)",
+                "Only if b > a"
+              ],
+              "correct": 2,
+              "explanation": "The +C always cancels: [F(b)+C] - [F(a)+C] = F(b) - F(a). Including it is harmless but unnecessary and clutters working. For definite integrals, never write +C."
+            },
+            {
+              "id": "q4",
+              "text": "Find d/dx[∫₀^(x²) sin(t) dt] using FTC Part 1 with the Chain Rule.",
+              "options": [
+                "sin(x²)",
+                "cos(x²)",
+                "2x·sin(x²)",
+                "-cos(x²)·2x"
+              ],
+              "correct": 2,
+              "explanation": "Upper bound is g(x) = x², so apply the Chain Rule version: f(g(x))·g'(x) = sin(x²)·2x = 2x·sin(x²). Evaluate the integrand sin(t) at t = x², then multiply by the derivative of x²."
+            },
+            {
+              "id": "q5",
+              "text": "The average value of f(x) on [a,b] is given by:",
+              "options": [
+                "[f(a) + f(b)] / 2",
+                "(1/(b-a)) · ∫ₐᵇ f(x)dx",
+                "∫ₐᵇ f(x)dx",
+                "F(b) - F(a)"
+              ],
+              "correct": 1,
+              "explanation": "Average value = (1/(b-a))·∫ₐᵇ f(x)dx. This is the height of a rectangle over [a,b] with the same area as the region under the curve. The MVT for Integrals guarantees f achieves this value at some c in [a,b]."
+            }
+          ]
+        },
+        {
+          "id": "ch6-sec1-practice",
+          "type": "practice",
+          "label": "Practice",
+          "heading": "Practice Problems",
+          "problems": [
+            {
+              "level": "Easy",
+              "label": "Concept Check",
+              "problem": "Using FTC Part 1, find the derivative of A(x) = ∫₂ˣ sin(t²) dt.",
+              "hint": "FTC Part 1: d/dx[∫ₐˣ f(t)dt] = f(x). The lower limit being 2 (a constant) does not matter.",
+              "solution": "By FTC Part 1, simply evaluate the integrand sin(t²) at t = x.\nA'(x) = sin(x²).\nNo integration is required — differentiating an accumulation integral just returns the integrand."
+            },
+            {
+              "level": "Medium",
+              "label": "Application",
+              "problem": "Evaluate ∫₁⁴ (2x + 3) dx using FTC Part 2.",
+              "hint": "Find F(x) (anti-derivative of 2x+3), then compute F(4) - F(1). No +C needed.",
+              "solution": "F(x) = x² + 3x.\nF(4) = 16 + 12 = 28.\nF(1) = 1 + 3 = 4.\nResult: 28 - 4 = 24."
+            },
+            {
+              "level": "Hard",
+              "label": "Thinking-Based",
+              "problem": "Evaluate ∫₁⁹ (1/√x) dx. Hint: rewrite using a fractional exponent.",
+              "hint": "1/√x = x^(-1/2). Apply power rule: add 1 to exponent to get 1/2, divide by 1/2 (multiply by 2). F(x) = 2√x.",
+              "solution": "Rewrite: ∫₁⁹ x^(-1/2) dx.\nF(x) = x^(1/2) / (1/2) = 2x^(1/2) = 2√x.\nF(9) = 2√9 = 2·3 = 6.\nF(1) = 2√1 = 2·1 = 2.\nResult: 6 - 2 = 4."
+            },
+            {
+              "level": "Real-World",
+              "label": "Economics",
+              "problem": "A factory's marginal cost is C'(x) = 10 - 2x. Find the total net cost to increase production from x=1 to x=4 units.",
+              "hint": "Total cost = ∫₁⁴ C'(x) dx. The marginal cost is the derivative — integrate it to recover the total cost change.",
+              "solution": "Total cost = ∫₁⁴ (10 - 2x) dx.\nF(x) = 10x - x².\nF(4) = 40 - 16 = 24.\nF(1) = 10 - 1 = 9.\nTotal net cost = 24 - 9 = $15."
+            }
+          ]
+        },
+        {
+          "id": "ch6-sec1-mistakes",
+          "type": "mistakes",
+          "label": "Common Mistakes",
+          "heading": "Common Mistakes & Misconceptions",
+          "mistakes": [
+            {
+              "title": "The Discontinuity Trap",
+              "description": "FTC Part 2 requires f to be continuous on ALL of [a,b]. Blindly applying F(b)-F(a) across a vertical asymptote gives nonsense. Example: ∫₋₁¹ (1/x²)dx. The anti-derivative is -1/x. F(1)-F(-1) = -1-1 = -2. But 1/x² is strictly positive — it cannot have negative area! The function is undefined at x=0 (inside [-1,1]), making this an improper integral that actually diverges to infinity."
+            },
+            {
+              "title": "Including +C in Definite Integrals",
+              "description": "When evaluating definite integrals, students write F(x)+C at each bound. While the C cancels harmlessly, it signals confusion between indefinite and definite integrals. For definite integrals, the +C is irrelevant — always omit it. Indefinite integrals require +C; definite integrals produce a specific number."
+            },
+            {
+              "title": "Forgetting the Chain Rule in FTC Part 1",
+              "description": "When the upper limit is g(x) (not just x), students write f(x) instead of f(g(x))·g'(x). Example: d/dx[∫₀^(x³) cos(t)dt] ≠ cos(x). It equals cos(x³)·3x². Always multiply by the derivative of the upper boundary function."
+            }
+          ]
+        },
+        {
+          "id": "ch6-sec1-advanced",
+          "type": "advanced",
+          "label": "Advanced Insights",
+          "heading": "Advanced Insights",
+          "insights": [
+            {
+              "title": "A Point Integral — the 1D Foundation of Higher Theorems",
+              "body": "The FTC connects an integral over a one-dimensional interval [a,b] to zero-dimensional boundary points a and b. The answer F(b)-F(a) is purely an evaluation at two points. This 1D structure is the prototype for far more powerful theorems in multivariable calculus: Green's Theorem (2D), Stokes' Theorem (3D surfaces), and the Divergence Theorem all share the same philosophical structure — evaluating a higher-dimensional integral reduces to evaluating something on its lower-dimensional boundary."
+            },
+            {
+              "title": "The FTC as Inverse Operations",
+              "body": "The FTC formally establishes that differentiation and integration are inverse operations — but with a subtle asymmetry. Differentiating always recovers the original function exactly (Part 1). Integrating and then differentiating also recovers the original (Part 2), but only up to a constant. This is precisely why +C appears in indefinite integrals: integration loses one piece of information (the vertical position), and differentiation destroys it irreversibly."
+            }
+          ]
+        },
+        {
+          "id": "ch6-sec1-applications",
+          "type": "applications",
+          "label": "Real-World",
+          "heading": "Real-World Applications",
+          "applications": [
+            {
+              "field": "Physics (Work and Energy)",
+              "description": "Total work done by a variable force over a path is W = ∫ₐᵇ F(x)dx. Evaluating a complex force integral via FTC gives the exact energy transferred — from spring mechanics (Hooke's Law) to gravitational potential energy in a varying field."
+            },
+            {
+              "field": "Economics (Consumer & Producer Surplus)",
+              "description": "Consumer surplus is the area between the demand curve and the equilibrium price — a definite integral evaluated via FTC Part 2. Finding the intersection points gives the limits; subtracting anti-derivatives at those limits gives exact surplus values."
+            },
+            {
+              "field": "Data Science / Statistics (Exact Probabilities)",
+              "description": "For continuous distributions (Normal, Exponential, etc.), P(a ≤ X ≤ b) = ∫ₐᵇ f(x)dx. Data scientists evaluate this via FTC or numerical integration. The total area under any PDF is ∫₋∞^∞ f(x)dx = 1 — an improper integral evaluated by taking limits."
+            },
+            {
+              "field": "Engineering (Net Accumulation)",
+              "description": "A reservoir with variable inflow and outflow rates has net rate-of-change R(t). Total water gained or lost over [0, 24] hours = ∫₀²⁴ R(t)dt = F(24) - F(0). Engineers use FTC to convert continuous rate data into exact accumulated totals."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "id": "ch5",
+  "title": "The Definite Integral",
+  "subtitle": "Area, Accumulation, and the Fundamental Theorem",
+  "sections": [
+    {
+      "id": "ch5-sec1",
+      "title": "Definite Integrals and Area Under a Curve",
+      "subsections": [
+        {
+          "id": "ch5-sec1-intuition",
+          "type": "intuition",
+          "label": "Intuition First",
+          "heading": "What is the Area Under a Curve?",
+          "body": "Imagine driving at a constant speed of 2 m/s for 8 seconds. Total distance = 2 × 8 = 16 metres. On a velocity-time graph, that distance is the rectangle under the flat line — width 8, height 2. But what if your speed is constantly changing? You cannot multiply length × width because the top of your shape is no longer flat.",
+          "analogy": {
+            "title": "The Stacking Slices Analogy",
+            "body": "To find the area under a curvy shape, slice the space under the curve into vertical rectangular strips. With 1-second-wide strips you get a rough estimate — the flat rectangle tops do not perfectly follow the curve.\n\nBut make those strips infinitely thin — width approaching zero — and stack infinitely many of them. The flat tops merge perfectly into the smooth curve. This is the Definite Integral: the mathematical operation of summing an infinite number of infinitely thin slices to get the exact accumulated total.\n\nRiemann Sum (estimate): Area ≈ Σ f(xᵢ)·Δx, where Δx = (b-a)/n\nDefinite Integral (exact): ∫ₐᵇ f(x)dx = lim(n→∞) Σ f(xᵢ)·Δx",
+            "keyPoints": [
+              "The definite integral ∫ₐᵇ f(x)dx gives the exact net signed area between f(x) and the x-axis from a to b.",
+              "Signed area: regions above the x-axis are positive; regions below are negative.",
+              "Riemann sums approximate; taking n→∞ gives the exact integral.",
+              "Fundamental Theorem shortcut: ∫ₐᵇ f(x)dx = F(b) - F(a), where F is any anti-derivative of f."
+            ]
+          }
+        },
+        {
+          "id": "ch5-sec1-concepts",
+          "type": "concepts",
+          "label": "Formal Concepts",
+          "heading": "Formal Concepts & Definitions",
+          "definitions": [
+            {
+              "term": "Riemann Sum",
+              "definition": "An approximation of the area under f(x) on [a,b] using n rectangles of equal width Δx = (b-a)/n. Each rectangle has height f(xᵢ) at a chosen point in the subinterval. Σᵢ f(xᵢ)·Δx — the more rectangles, the better the estimate."
+            },
+            {
+              "term": "Definite Integral ∫ₐᵇ f(x)dx",
+              "definition": "The exact limit of the Riemann sum as n→∞ (and Δx→0). Written ∫ₐᵇ f(x)dx = lim(n→∞) Σ f(xᵢ)·Δx. Computes the exact net signed area between the curve and the x-axis from x=a to x=b."
+            },
+            {
+              "term": "Limits of Integration (a, b)",
+              "definition": "The lower bound a and upper bound b define the interval over which the area is accumulated. The integral strictly evaluates F(b) - F(a): upper bound minus lower bound."
+            },
+            {
+              "term": "Fundamental Theorem of Calculus",
+              "definition": "Part 1: If A(x) = ∫ₐˣ f(t)dt, then A'(x) = f(x) — the accumulation function's derivative is the integrand. Part 2 (evaluation): ∫ₐᵇ f(x)dx = F(b) - F(a), where F is any anti-derivative of f. This bridges anti-derivatives and areas — the two great ideas of calculus."
+            },
+            {
+              "term": "Signed vs. Geometric Area",
+              "definition": "The definite integral computes signed area: positive above the x-axis, negative below. To find total geometric area (e.g. paint on a wall), you must split the integral at every x-intercept, evaluate each piece, and take absolute values before summing."
+            },
+            {
+              "term": "Net Area vs. Absolute Area",
+              "definition": "Net area = ∫ₐᵇ f(x)dx (positive and negative regions cancel). Absolute area = ∫ₐᵇ |f(x)|dx (all regions counted positively). Always clarify which is asked before evaluating."
+            },
+            {
+              "term": "Reversing Limits",
+              "definition": "∫ᵇₐ f(x)dx = -∫ₐᵇ f(x)dx. Swapping the limits of integration flips the sign. This makes sense: stepping backwards (b<a) means Δx is negative."
+            },
+            {
+              "term": "Zero-Width Integral",
+              "definition": "∫ₐᵃ f(x)dx = 0. An interval of zero width has zero area — a degenerate rectangle with no width."
+            },
+            {
+              "term": "Interval Additivity",
+              "definition": "∫ₐᶜ f(x)dx = ∫ₐᵇ f(x)dx + ∫ᵦᶜ f(x)dx. You can split any integral at an intermediate point b and add the two pieces. Useful for splitting at discontinuities or sign changes."
+            },
+            {
+              "term": "Area Between Two Curves",
+              "definition": "If f(x) ≥ g(x) on [a,b], the area between them is ∫ₐᵇ [f(x) - g(x)] dx. First find the intersection points (set f=g, solve for x) — these become the limits of integration."
+            },
+            {
+              "term": "Improper Integral",
+              "definition": "A definite integral where either a limit is ±∞, or the integrand has a vertical asymptote (discontinuity) inside [a,b]. Cannot be evaluated by the standard Fundamental Theorem — must use limits: lim(t→∞)∫ₐᵗ f(x)dx, or split at the discontinuity."
+            },
+            {
+              "term": "Trapezoidal Rule",
+              "definition": "A numerical approximation that replaces each rectangular strip with a trapezoid (slanted top connecting two heights). Much more accurate than Riemann sums for the same n: Area ≈ (Δx/2)[f(x₀) + 2f(x₁) + 2f(x₂) + ... + f(xₙ)]."
+            }
+          ]
+        },
+        {
+          "id": "ch5-sec1-examples",
+          "type": "examples",
+          "label": "Examples",
+          "heading": "Step-by-Step Examples",
+          "examples": [
+            {
+              "level": "Basic",
+              "title": "Riemann Sum Approximation",
+              "problem": "Approximate the area under f(x) = x² on [1,4] using n=6 left-endpoint rectangles.",
+              "steps": [
+                "Find width: Δx = (4-1)/6 = 0.5.",
+                "Left endpoints: x = 1, 1.5, 2, 2.5, 3, 3.5.",
+                "Evaluate heights: f(1)=1, f(1.5)=2.25, f(2)=4, f(2.5)=6.25, f(3)=9, f(3.5)=12.25.",
+                "Sum areas: 0.5 × (1 + 2.25 + 4 + 6.25 + 9 + 12.25) = 0.5 × 34.75 = 17.375.",
+                "Exact value (n→∞): ∫₁⁴ x²dx = [x³/3]₁⁴ = 64/3 - 1/3 = 63/3 = 21. The Riemann sum underestimates because f is increasing."
+              ],
+              "result": "Riemann sum ≈ 17.375 (exact = 21)"
+            },
+            {
+              "level": "Intermediate",
+              "title": "Exact Area via Fundamental Theorem",
+              "problem": "Evaluate the exact definite integral ∫₃⁵ 5x dx.",
+              "steps": [
+                "Find the anti-derivative of 5x: F(x) = 5x²/2.",
+                "Evaluate at upper bound b=5: F(5) = 5(25)/2 = 125/2.",
+                "Evaluate at lower bound a=3: F(3) = 5(9)/2 = 45/2.",
+                "Subtract: F(5) - F(3) = 125/2 - 45/2 = 80/2 = 40."
+              ],
+              "result": "∫₃⁵ 5x dx = 40"
+            },
+            {
+              "level": "Advanced",
+              "title": "Area Between Two Intersecting Curves",
+              "problem": "Find the exact area bounded by f(x) = x² - 4x + 1 and g(x) = x - 3.",
+              "steps": [
+                "Find intersections: set f(x) = g(x). x² - 4x + 1 = x - 3 → x² - 5x + 4 = 0 → (x-1)(x-4) = 0. Limits: x=1 and x=4.",
+                "Determine upper curve on [1,4]: at x=2, g(2) = -1, f(2) = -3. So g(x) = x-3 is above f(x).",
+                "Set up: ∫₁⁴ [(x-3) - (x²-4x+1)] dx = ∫₁⁴ (-x² + 5x - 4) dx.",
+                "Anti-derivative: F(x) = -x³/3 + 5x²/2 - 4x.",
+                "F(4) = -64/3 + 40 - 16 = -64/3 + 24 = (72-64)/3 = 8/3... wait, let us compute: -64/3 + 80/2 - 16 = -64/3 + 40 - 16 = -64/3 + 24 = (-64+72)/3 = 8/3.",
+                "F(1) = -1/3 + 5/2 - 4 = -1/3 + 5/2 - 4 = (-2 + 15 - 24)/6 = -11/6.",
+                "Area = F(4) - F(1) = 8/3 - (-11/6) = 16/6 + 11/6 = 27/6 = 9/2."
+              ],
+              "result": "Area = 9/2 = 4.5 square units"
+            }
+          ]
+        },
+        {
+          "id": "ch5-sec1-visual",
+          "type": "visual",
+          "label": "Visual",
+          "heading": "Visual Understanding — Riemann Sums to Exact Area",
+          "graph": {
+            "type": "integral",
+            "defaultExpression": "x^2",
+            "xRange": [-0.5, 4.5],
+            "yRange": [-1, 18],
+            "limitA": 1,
+            "limitB": 4,
+            "label": "f(x) = x²"
+          },
+          "visualNotes": [
+            "Upper vs. Lower Sums: Left-endpoint rectangles underestimate for increasing functions (rectangle tops are all below the curve). Right-endpoint rectangles overestimate. The true area is always squeezed between them.",
+            "Signed area: If you move the interval to include negative-x regions, the integral subtracts area below the x-axis. Try f(x) = x³ on [-2,2] — the symmetric cancellation makes the integral exactly 0.",
+            "Convergence: Increase n with the slider and watch the Riemann sum converge to the exact integral value. Even n=10 is already quite close for smooth functions.",
+            "Area between curves: The area between f(x) and g(x) is ∫[f-g]dx over their intersection interval — set up as two separate integrals if the curves cross inside the interval."
+          ]
+        },
+        {
+          "id": "ch5-sec1-code",
+          "type": "code",
+          "label": "Python",
+          "heading": "Python / Computational Section",
+          "snippets": [
+            {
+              "title": "Symbolic Definite Integration",
+              "code": "import sympy as sp\n\nx = sp.symbols('x')\n\n# Exact definite integral of x^3 from -2 to 2\nresult1 = sp.integrate(x**3, (x, -2, 2))\nprint(\"∫₋₂² x³ dx =\", result1)  # 0 (signed cancellation)\n\n# Exact integral of 5x from 3 to 5\nresult2 = sp.integrate(5*x, (x, 3, 5))\nprint(\"∫₃⁵ 5x dx =\", result2)   # 40\n\n# Area between curves: g(x)=x-3 and f(x)=x^2-4x+1\ng = x - 3\nf = x**2 - 4*x + 1\narea = sp.integrate(g - f, (x, 1, 4))\nprint(\"Area between curves =\", area)  # 9/2\n\n# Decimal approximation\nresult3 = sp.integrate(sp.cos(x), (x, -1, 1))\nprint(\"∫₋₁¹ cos(x) dx ≈\", float(result3.evalf(6)))"
+            },
+            {
+              "title": "Numerical Riemann Sum",
+              "code": "def f(x):\n    return x**2\n\ndef riemann_sum(f, a, b, n, method='left'):\n    \"\"\"Approximate area under f from a to b using n rectangles.\"\"\"\n    width = (b - a) / n\n    total = 0\n    for i in range(n):\n        if method == 'left':\n            x_i = a + i * width\n        elif method == 'right':\n            x_i = a + (i + 1) * width\n        elif method == 'mid':\n            x_i = a + (i + 0.5) * width\n        total += f(x_i) * width\n    return total\n\n# Compare accuracy as n increases\nfor n in [6, 100, 10000, 100000]:\n    approx = riemann_sum(f, 1, 4, n, 'left')\n    print(f\"n={n:7d}: {approx:.6f}\")\nprint(f\"Exact:         21.000000\")"
+            },
+            {
+              "title": "Trapezoidal Rule",
+              "code": "from math import cos, pi\n\ndef trap_integral(f, a, b, n):\n    \"\"\"Trapezoidal rule — much more accurate than rectangles.\"\"\"\n    width = (b - a) / n\n    # Endpoints counted once; interior points counted twice\n    heights = f(a) + f(b)\n    heights += 2 * sum(f(a + width * i) for i in range(1, n))\n    return 0.5 * width * heights\n\n# Test on x^2 from 1 to 4 (exact = 21)\nprint(\"Trapezoid n=10:\", trap_integral(lambda x: x**2, 1, 4, 10))\nprint(\"Trapezoid n=100:\", trap_integral(lambda x: x**2, 1, 4, 100))\n\n# Test on 3cos(x) from 0 to pi/4\ng = lambda x: 3 * cos(x)\nprint(\"3cos(x) approx:\", trap_integral(g, 0, pi/4, 100))\n# Compare with exact: 3*sin(pi/4) - 3*sin(0) = 3*(√2/2) ≈ 2.1213\nfrom math import sin, sqrt\nprint(\"3cos(x) exact: \", 3 * sin(pi/4))"
+            }
+          ]
+        },
+        {
+          "id": "ch5-sec1-quiz",
+          "type": "quiz",
+          "label": "Quiz",
+          "heading": "Quiz",
+          "questions": [
+            {
+              "id": "q1",
+              "text": "What does ∫₁⁴ f(x)dx compute geometrically?",
+              "options": [
+                "The derivative of f(x) at x = 4",
+                "The net signed area between f(x) and the x-axis from x=1 to x=4",
+                "The average value of f(x)",
+                "The slope of f(x) at x = 1"
+              ],
+              "correct": 1,
+              "explanation": "The definite integral ∫ₐᵇ f(x)dx computes the net signed area between f(x) and the x-axis over [a,b]. Regions above the x-axis contribute positive area; regions below contribute negative area."
+            },
+            {
+              "id": "q2",
+              "text": "Evaluate ∫₁⁴ 3 dx geometrically — what shape is the area?",
+              "options": [
+                "A triangle with area 9/2",
+                "A rectangle of width 3 and height 3, area = 9",
+                "A parabolic region of area 18",
+                "Zero — the integrand is a constant"
+              ],
+              "correct": 1,
+              "explanation": "f(x) = 3 is a horizontal line. The region from x=1 to x=4 is a rectangle: width = 4-1 = 3, height = 3. Area = 3×3 = 9. Formally: [3x]₁⁴ = 12-3 = 9."
+            },
+            {
+              "id": "q3",
+              "text": "Why is ∫₋₂² x³ dx = 0, even though x³ is clearly not zero on [-2,2]?",
+              "options": [
+                "Because x³ equals zero at x=0",
+                "Because the negative area from x=-2 to 0 exactly cancels the positive area from x=0 to 2",
+                "Because the anti-derivative of x³ is zero",
+                "This is incorrect — the integral is not zero"
+              ],
+              "correct": 1,
+              "explanation": "x³ is an odd function — perfectly anti-symmetric about the origin. The region below the x-axis from -2 to 0 has exactly the same absolute area as the region above from 0 to 2, so they cancel in the signed integral. Net area = 0, but geometric area = 2×(16/4) = 8."
+            },
+            {
+              "id": "q4",
+              "text": "To find the area BETWEEN f(x) = x² and g(x) = 5x on their intersection interval, you compute:",
+              "options": [
+                "∫[f(x)·g(x)]dx",
+                "∫[f(x)]dx - ∫[g(x)]dx over separate intervals",
+                "∫[upper - lower]dx = ∫[5x - x²]dx over the intersection interval",
+                "∫[f(x) + g(x)]dx"
+              ],
+              "correct": 2,
+              "explanation": "Area between curves = ∫ₐᵇ [upper(x) - lower(x)] dx. First find intersections (set f=g: x²=5x → x=0,5). On [0,5], g(x)=5x is above f(x)=x². So area = ∫₀⁵(5x-x²)dx = 125/6."
+            },
+            {
+              "id": "q5",
+              "text": "Why can you NOT directly apply the Fundamental Theorem to ∫₋₁¹ (1/x²) dx?",
+              "options": [
+                "Because 1/x² has no anti-derivative",
+                "Because 1/x² has a vertical asymptote at x=0, which is inside [-1,1], making it an improper integral",
+                "Because the interval [-1,1] is symmetric",
+                "Because 1/x² is always positive, so the theorem does not apply"
+              ],
+              "correct": 1,
+              "explanation": "The Fundamental Theorem requires f to be continuous on the entire closed interval [a,b]. But 1/x² has a vertical asymptote (discontinuity) at x=0, which lies inside [-1,1]. Blindly applying the theorem gives -2, which is absurd for a positive function. This must be treated as an improper integral — and it actually diverges to infinity."
+            }
+          ]
+        },
+        {
+          "id": "ch5-sec1-practice",
+          "type": "practice",
+          "label": "Practice",
+          "heading": "Practice Problems",
+          "problems": [
+            {
+              "level": "Easy",
+              "label": "Concept Check",
+              "problem": "Evaluate ∫₁⁴ 3 dx. Describe the corresponding geometric shape.",
+              "hint": "The anti-derivative of the constant 3 is 3x. Apply the Fundamental Theorem: F(4) - F(1).",
+              "solution": "[3x]₁⁴ = 3(4) - 3(1) = 12 - 3 = 9.\nGeometric shape: a rectangle with width = 4-1 = 3 and height = 3. Area = 3×3 = 9. ✓"
+            },
+            {
+              "level": "Medium",
+              "label": "Application",
+              "problem": "Find the exact area bounded by f(x) = x² and g(x) = 5x on their natural intersection interval.",
+              "hint": "Set f(x) = g(x) to find intersection points. These become your limits. Identify the upper curve, then integrate [upper - lower].",
+              "solution": "Intersections: x² = 5x → x(x-5) = 0 → x=0 and x=5.\nOn [0,5], g(x)=5x ≥ f(x)=x² (check at x=1: 5>1).\nArea = ∫₀⁵ (5x - x²) dx = [5x²/2 - x³/3]₀⁵.\nAt x=5: 125/2 - 125/3 = 375/6 - 250/6 = 125/6.\nAt x=0: 0.\nArea = 125/6 ≈ 20.83 square units."
+            },
+            {
+              "level": "Hard",
+              "label": "Thinking-Based",
+              "problem": "Investigate ∫₋₁¹ (1/x²) dx. Can the Fundamental Theorem be applied directly? What goes wrong?",
+              "hint": "Check whether 1/x² is continuous on [-1,1]. What happens at x=0? Try applying the theorem blindly and examine whether the result makes sense.",
+              "solution": "1/x² has a vertical asymptote at x=0, which lies inside [-1,1]. The function is NOT continuous on the interval.\nBlind application: [-1/x]₋₁¹ = -1 - 1 = -2. But 1/x² > 0 everywhere — a positive function cannot have negative area! The result is wrong.\nThis is an improper integral. Split at x=0: lim(t→0⁻)∫₋₁ᵗ x⁻² dx + lim(t→0⁺)∫ₜ¹ x⁻² dx. Both limits diverge to +∞. The integral does not exist."
+            },
+            {
+              "level": "Real-World",
+              "label": "Economics",
+              "problem": "The Gini coefficient measures wealth inequality. If perfect equality is y=x and a nation's Lorenz curve is y=x³, the Gini coefficient = 2×∫₀¹(x - x³)dx. Calculate it.",
+              "hint": "Integrate term by term: ∫x dx and ∫x³ dx. Evaluate from 0 to 1, then multiply by 2.",
+              "solution": "∫₀¹ (x - x³) dx = [x²/2 - x⁴/4]₀¹ = (1/2 - 1/4) - 0 = 1/4.\nGini = 2 × 1/4 = 0.5.\nA Gini of 0 = perfect equality; Gini of 1 = total inequality. This nation's score of 0.5 indicates significant inequality — comparable to several real-world developing economies."
+            }
+          ]
+        },
+        {
+          "id": "ch5-sec1-mistakes",
+          "type": "mistakes",
+          "label": "Common Mistakes",
+          "heading": "Common Mistakes & Misconceptions",
+          "mistakes": [
+            {
+              "title": "Forgetting Absolute Value for Geometric Area",
+              "description": "When asked for 'total area' (not net area), students blindly compute ∫ₐᵇ f(x)dx without checking if the curve crosses the x-axis. If it does, negative regions cancel positive ones and the result is the NET area, not the geometric area. Fix: find all roots in [a,b], split the integral at each, take absolute values, then sum."
+            },
+            {
+              "title": "The Improper Integral Trap",
+              "description": "Applying the standard Fundamental Theorem across a vertical asymptote (a point where the function is undefined and explodes to infinity). If f is not continuous on all of [a,b], the basic theorem is invalid. You must split the integral at the discontinuity and use limit notation. The classic danger: ∫₋₁¹ (1/x²)dx gives a nonsensical negative result if applied blindly."
+            },
+            {
+              "title": "Backwards Integration Sign Error",
+              "description": "∫ₐᵇ f(x)dx = F(b) - F(a), not F(a) - F(b). If you accidentally subtract in the wrong order, your sign flips. When setting up area between curves, also be careful about which curve is upper and which is lower — integrating [lower - upper] gives a negative area."
+            }
+          ]
+        },
+        {
+          "id": "ch5-sec1-advanced",
+          "type": "advanced",
+          "label": "Advanced Insights",
+          "heading": "Advanced Insights",
+          "insights": [
+            {
+              "title": "Simpson's Rule — Parabolic Approximation",
+              "body": "While Riemann sums use flat rectangles and the Trapezoidal Rule uses straight-line tops, Simpson's Rule fits quadratic (parabolic) curves through groups of three points. Because parabolas are much closer to most smooth curves than straight lines, Simpson's Rule converges dramatically faster. Error drops as O(Δx⁴) compared to O(Δx²) for trapezoids. It also gives the exact result for any polynomial of degree 3 or less — a remarkable property used in engineering and scientific computing."
+            },
+            {
+              "title": "The Accumulation Function and the FTC",
+              "body": "Replace the upper limit with a variable: A(x) = ∫ₐˣ f(t) dt. This creates an accumulation function whose output is the running total of area from a up to x. The Fundamental Theorem Part 1 says A'(x) = f(x) — the rate at which area accumulates at point x is exactly the height of the curve at that point. This is the deepest result in all of calculus: differentiation and integration are exact inverse operations, two sides of the same coin."
+            }
+          ]
+        },
+        {
+          "id": "ch5-sec1-applications",
+          "type": "applications",
+          "label": "Real-World",
+          "heading": "Real-World Applications",
+          "applications": [
+            {
+              "field": "Physics (Work and Energy)",
+              "description": "Work = force × distance, but only when force is constant. Stretching a spring requires increasing force (Hooke's Law: F = kx). The total work done over displacement [0,d] is W = ∫₀ᵈ kx dx = kd²/2 — the definite integral of a variable force function."
+            },
+            {
+              "field": "Economics (Consumer & Producer Surplus)",
+              "description": "Consumer surplus is the area between the demand curve and the market price line — a definite integral over the quantity range. The Gini coefficient quantifies national income inequality as the area between the equality line and the actual Lorenz curve, scaled to [0,1]."
+            },
+            {
+              "field": "Data Science / Statistics (Probability)",
+              "description": "For continuous random variables, P(a ≤ X ≤ b) = ∫ₐᵇ f(x) dx, where f(x) is the probability density function (like the normal bell curve). Expected values, variances, and percentiles are all definite integrals. The entire field of continuous probability rests on the definite integral."
+            },
+            {
+              "field": "Engineering (3D Volumes by Slicing)",
+              "description": "A conical tank or hemispherical gas reservoir has a circular cross-section A(x) = πr(x)² that changes with height x. Integrating A(x) along the height stacks infinitely many 2D circular slices to yield the exact 3D volume: V = ∫ₐᵇ A(x) dx. The same principle applies to volumes of revolution."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

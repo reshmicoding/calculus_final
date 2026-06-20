@@ -1,0 +1,293 @@
+{
+  "id": "ch2",
+  "title": "The Derivative",
+  "subtitle": "Slopes and Limits",
+  "sections": [
+    {
+      "id": "ch2-sec1",
+      "title": "The Derivative",
+      "subsections": [
+        {
+          "id": "ch2-sec1-intuition",
+          "type": "intuition",
+          "label": "Intuition First",
+          "heading": "What is the Derivative?",
+          "body": "Calculus is the science of change, developed to deal with constantly changing values like the position and velocity of moving objects. The derivative is fundamentally the exact rate of change — the slope of a function at one specific, instantaneous point.",
+          "analogy": {
+            "title": "The Driving Analogy (Distance vs. Velocity)",
+            "body": "Imagine you are driving. If your distance traveled over time is represented by a function f(t), subtraction gives you the change in distance between two times. The average velocity is simply the change in distance divided by the change in time.\n\nBut what if you want to know what your speedometer read at exactly 2:00 PM? Average velocity over an hour will not tell you.\n\nThe derivative is the mathematical tool that shrinks that time window down to zero, giving you the instantaneous speed on your dashboard.",
+            "keyPoints": [
+              "The Microscope Equation: zoom in on any smooth curve far enough and it looks like a straight line — that line is the tangent, and its slope is the derivative.",
+              "The secant line gives average rate of change. The tangent line gives instantaneous rate of change.",
+              "f'(x) = lim(h to 0) [f(x+h) - f(x)] / h — this is the core definition."
+            ]
+          }
+        },
+        {
+          "id": "ch2-sec1-concepts",
+          "type": "concepts",
+          "label": "Formal Concepts",
+          "heading": "Formal Concepts & Definitions",
+          "definitions": [
+            { "term": "Secant Line", "definition": "A line passing through two points on a curve. Its slope [f(x+h) - f(x)]/h is the average rate of change over the interval h — an estimate, not the exact slope." },
+            { "term": "Difference Quotient", "definition": "[f(x+h) - f(x)] / h — measures the slope of the secant line between x and x+h. Taking its limit as h→0 yields the derivative." },
+            { "term": "Limit Definition of the Derivative", "definition": "f'(x) = lim(h→0) [f(x+h) - f(x)] / h. As h shrinks to zero, the secant line becomes the tangent line, giving the exact instantaneous slope at x." },
+            { "term": "Tangent Line", "definition": "The line that touches a curve at exactly one point (locally) with the same slope as the curve at that point. Its slope is the derivative f'(x₀)." },
+            { "term": "Lagrange Notation", "definition": "f'(x) — read 'f prime of x'. The most common notation for the derivative." },
+            { "term": "Leibniz Notation", "definition": "dy/dx or df/dx. Here dx is an infinitely tiny change in x, and dy is the corresponding change in y. Emphasises the ratio-of-infinitesimals interpretation." },
+            { "term": "Microscope Equation (Linearisation)", "definition": "f(b) ≈ f'(a)(b - a) + f(a). Any smooth curve looks like a straight line when zoomed in sufficiently, so the tangent line at a known point a estimates f at nearby b." },
+            { "term": "Local Linearity", "definition": "The property that any smooth curve, zoomed in far enough at a point, appears to be a straight line. This is the geometric reason the derivative is a useful local approximation." },
+            { "term": "Non-Differentiable Point", "definition": "A point where the derivative does not exist — at sharp corners (|x| at x=0), vertical tangents (x^(1/3) at x=0), or discontinuities. A function can be continuous but not differentiable." }
+          ]
+        },
+        {
+          "id": "ch2-sec1-examples",
+          "type": "examples",
+          "label": "Examples",
+          "heading": "Step-by-Step Examples",
+          "examples": [
+            {
+              "level": "Basic",
+              "title": "Derivative of f(x) = x² from the Limit Definition",
+              "problem": "Find f'(x) for f(x) = x² using the difference quotient.",
+              "steps": [
+                "Setup the difference quotient: [f(x+h) - f(x)] / h",
+                "Substitute f(x) = x²: [(x+h)² - x²] / h",
+                "Expand the binomial: [x² + 2xh + h² - x²] / h",
+                "Cancel the x² terms: [2xh + h²] / h",
+                "Factor out h from the numerator: h(2x + h) / h = 2x + h",
+                "Take the limit as h → 0: lim(h→0) [2x + h] = 2x"
+              ],
+              "result": "f'(x) = 2x"
+            },
+            {
+              "level": "Intermediate",
+              "title": "Finding the Slope at a Specific Point",
+              "problem": "Find the instantaneous slope of f(x) = x² - 2x + 1 at x = 1.6.",
+              "steps": [
+                "Differentiate each term: d/dx[x²] = 2x, d/dx[-2x] = -2, d/dx[1] = 0.",
+                "The general derivative is f'(x) = 2x - 2.",
+                "Substitute x = 1.6: f'(1.6) = 2(1.6) - 2 = 3.2 - 2 = 1.2."
+              ],
+              "result": "f'(1.6) = 1.2"
+            },
+            {
+              "level": "Advanced",
+              "title": "Equation of the Tangent Line",
+              "problem": "Find the tangent line to y = x⁴ - x² + 3 at x = 1.",
+              "steps": [
+                "Find the y-coordinate: f(1) = 1 - 1 + 3 = 3. Point: (1, 3).",
+                "Find the derivative: dy/dx = 4x³ - 2x.",
+                "Find the slope at x = 1: f'(1) = 4(1)³ - 2(1) = 2. Slope m = 2.",
+                "Apply point-slope form: y - 3 = 2(x - 1).",
+                "Simplify: y = 2x + 1."
+              ],
+              "result": "Tangent line: y = 2x + 1"
+            }
+          ]
+        },
+        {
+          "id": "ch2-sec1-visual",
+          "type": "visual",
+          "label": "Visual",
+          "heading": "Visual Understanding",
+          "graph": {
+            "type": "derivative",
+            "defaultExpression": "x^2 - 2*x + 1",
+            "xRange": [-2, 4],
+            "yRange": [-1, 6],
+            "label": "f(x) = x² - 2x + 1",
+            "showDerivative": true,
+            "showTangent": true,
+            "tangentPoint": 1.6
+          },
+          "visualNotes": [
+            "Secant to Tangent: As the second point slides toward the first, the secant line pivots and becomes the tangent line at the limit.",
+            "Graphing the Derivative: When f(x) is at a peak or valley (slope = 0), f'(x) = 0. When f is rising steeply, f'(x) is large and positive.",
+            "Non-Differentiable Corners: f(x) = |x| has a sharp V at x=0. No single tangent line fits on that tip — the derivative does not exist there.",
+            "Use the slider to move the tangent point along the curve and watch the slope value change in real time."
+          ]
+        },
+        {
+          "id": "ch2-sec1-code",
+          "type": "code",
+          "label": "Python",
+          "heading": "Python / Computational Section",
+          "snippets": [
+            {
+              "title": "Derivative from Limits",
+              "code": "from sympy import symbols, limit\n\nx, h = symbols('x h')\n\n# Define f(x) = x^2\nf_x   = x**2\nf_x_h = (x + h)**2\n\n# Difference quotient\ndiff_quotient = (f_x_h - f_x) / h\nprint(\"Difference quotient:\", diff_quotient)\n\n# Limit as h -> 0\nderivative = limit(diff_quotient, h, 0)\nprint(\"Derivative of x^2:\", derivative)"
+            },
+            {
+              "title": "Fast Differentiation",
+              "code": "from sympy import symbols, diff\n\na = symbols('a')\nf = a**2\n\n# Differentiate\ndf = diff(f, a)\nprint(\"f'(a) =\", df)          # 2*a\n\n# Slope at a specific point\nslope_at_minus3 = df.subs(a, -3)\nprint(\"Slope at a=-3:\", slope_at_minus3)  # -6\n\n# More complex function\ng  = a**4 - a**2 + 3\ndg = diff(g, a)\nprint(\"g'(a) =\", dg)\nprint(\"g'(1) =\", dg.subs(a, 1))"
+            },
+            {
+              "title": "Tangent Line",
+              "code": "from sympy import symbols, diff\n\na  = symbols('a')\nf  = a**2\ndf = diff(f, a)\n\n# At x = 2\nx0 = 2\nm  = df.subs(a, x0)   # slope = 4\ny0 = f.subs(a, x0)    # y = 4\nb  = y0 - m * x0      # y-intercept = 4 - 8 = -4\n\nprint(f\"Tangent point : ({x0}, {y0})\")\nprint(f\"Slope m       : {m}\")\nprint(f\"Tangent line  : y = {m}*x + ({b})\")"
+            }
+          ]
+        },
+        {
+          "id": "ch2-sec1-quiz",
+          "type": "quiz",
+          "label": "Quiz",
+          "heading": "Quiz",
+          "questions": [
+            {
+              "id": "q1",
+              "text": "What is the formal limit definition of the derivative f'(x)?",
+              "options": [
+                "f'(x) = f(x+h) - f(x)",
+                "f'(x) = [f(x+h) - f(x)] / h",
+                "f'(x) = lim(h to 0) [f(x+h) - f(x)] / h",
+                "f'(x) = lim(x to 0) [f(x+h) - f(x)] / h"
+              ],
+              "correct": 2,
+              "explanation": "The derivative is the limit of the difference quotient as h→0 (not x→0). The h is the tiny gap we shrink; x is the fixed point where we measure the slope."
+            },
+            {
+              "id": "q2",
+              "text": "If f(x) = x², what is f'(3)?",
+              "options": ["3", "6", "9", "2"],
+              "correct": 1,
+              "explanation": "f'(x) = 2x for f(x) = x². Substituting x = 3 gives f'(3) = 2(3) = 6. The slope of the parabola at x = 3 is 6."
+            },
+            {
+              "id": "q3",
+              "text": "A function is continuous at x = 0. Can you conclude it is differentiable there?",
+              "options": [
+                "Yes — continuity always implies differentiability",
+                "No — continuity is necessary but not sufficient for differentiability",
+                "Yes — if it has no jumps it must have a defined slope",
+                "No — differentiability implies continuity, not the other way around"
+              ],
+              "correct": 1,
+              "explanation": "Differentiability implies continuity, but NOT vice versa. f(x) = |x| is continuous everywhere yet fails to be differentiable at x = 0 because of the sharp corner."
+            },
+            {
+              "id": "q4",
+              "text": "The Microscope Equation says f(b) ≈ f'(a)(b-a) + f(a). What is this doing geometrically?",
+              "options": [
+                "Computing the exact value of f at b using integration",
+                "Approximating f(b) using the tangent line at the known point a",
+                "Finding the secant slope between a and b",
+                "Computing the second derivative at a"
+              ],
+              "correct": 1,
+              "explanation": "The Microscope Equation is local linearisation — it uses the tangent line at a (slope f'(a), through (a, f(a))) to estimate f at a nearby point b. Exact only at a; accuracy decreases as b moves farther away."
+            },
+            {
+              "id": "q5",
+              "text": "What does the Mean Value Theorem guarantee for a function continuous and differentiable on [a, b]?",
+              "options": [
+                "The function reaches its maximum somewhere in (a, b)",
+                "There is at least one point c in (a, b) where f'(c) equals the average rate of change over [a, b]",
+                "The function is constant on [a, b]",
+                "The derivative is zero somewhere in (a, b)"
+              ],
+              "correct": 1,
+              "explanation": "The MVT guarantees a point c where instantaneous slope equals average slope [f(b)-f(a)]/(b-a). Classic analogy: if your average speed was 75 mph, at some instant your speedometer read exactly 75 mph."
+            }
+          ]
+        },
+        {
+          "id": "ch2-sec1-practice",
+          "type": "practice",
+          "label": "Practice",
+          "heading": "Practice Problems",
+          "problems": [
+            {
+              "level": "Easy",
+              "label": "Concept Check",
+              "problem": "What is the fundamental difference between the expression [f(x+Δx) - f(x)] / Δx and the actual derivative f'(x)?",
+              "hint": "One is a ratio over a finite interval; the other involves a limit.",
+              "solution": "The difference quotient is an average rate of change over a finite interval Δx — it is an estimate (the secant slope). The derivative f'(x) is the exact instantaneous rate of change obtained by taking the limit as Δx → 0. The derivative is the limit; the quotient is the approximation."
+            },
+            {
+              "level": "Medium",
+              "label": "Application",
+              "problem": "Using the limit definition of the derivative, find f'(x) for f(x) = 3x².",
+              "hint": "Write [3(x+h)² - 3x²]/h, expand, cancel, then take h→0.",
+              "solution": "1. Setup: lim(h→0) [3(x+h)² - 3x²] / h\n2. Expand: [3x² + 6xh + 3h² - 3x²] / h\n3. Cancel 3x²: [6xh + 3h²] / h\n4. Factor h: 6x + 3h\n5. Limit h→0: f'(x) = 6x"
+            },
+            {
+              "level": "Hard",
+              "label": "Thinking-Based",
+              "problem": "Prove algebraically using left-hand and right-hand limits why f'(0) does not exist for f(x) = |x|, even though the function is continuous at x = 0.",
+              "hint": "Write |0+h| for h>0 and h<0 separately. The function is piecewise: x for x≥0, -x for x<0.",
+              "solution": "Right-hand limit (h > 0): lim [|0+h|/h] = lim h/h = 1.\nLeft-hand limit (h < 0): lim [|0+h|/h] = lim (-h)/h = -1.\nSince 1 ≠ -1, the limit does not exist. f'(0) is undefined despite continuity — the sharp corner prevents a unique tangent line."
+            },
+            {
+              "level": "Real-World",
+              "label": "Physics",
+              "problem": "The distance of a moving car in miles over time t (hours) is f(t) = t². Using the Microscope Equation, estimate the distance traveled exactly 1 minute (1/60 hours) after t = 1 hour.",
+              "hint": "Use f(b) ≈ f'(a)(b-a) + f(a). Let a=1 and b=1+1/60.",
+              "solution": "f'(t) = 2t. At a=1: f(1)=1 mile, f'(1)=2 mph.\nMicroscope Equation: f(1+1/60) ≈ 2·(1/60) + 1 = 1/30 + 1 ≈ 1.0333 miles.\nThe car travels approximately 0.0333 miles (about 176 feet) in that minute."
+            }
+          ]
+        },
+        {
+          "id": "ch2-sec1-mistakes",
+          "type": "mistakes",
+          "label": "Common Mistakes",
+          "heading": "Common Mistakes & Misconceptions",
+          "mistakes": [
+            {
+              "title": "Setting h = 0 Too Early",
+              "description": "The most critical error: substituting h = 0 into the difference quotient before doing algebra. This gives 0/0 immediately. You must first expand the numerator, cancel the h algebraically, and only then take h → 0."
+            },
+            {
+              "title": "Continuity Does Not Guarantee Differentiability",
+              "description": "Every differentiable function is continuous, but not every continuous function is differentiable. f(x) = |x| is perfectly continuous everywhere but not differentiable at x = 0 (sharp corner). f(x) = x^(1/3) has a vertical tangent at x = 0 — also non-differentiable."
+            },
+            {
+              "title": "Confusing Average and Instantaneous Rate",
+              "description": "The difference quotient [f(x+h)-f(x)]/h is an AVERAGE rate over the interval h. Only after taking the limit as h→0 do you get the INSTANTANEOUS rate. Using the quotient directly (without the limit) to describe 'the slope at a point' is incorrect."
+            }
+          ]
+        },
+        {
+          "id": "ch2-sec1-advanced",
+          "type": "advanced",
+          "label": "Advanced Insights",
+          "heading": "Advanced Insights",
+          "insights": [
+            {
+              "title": "The Mean Value Theorem (MVT)",
+              "body": "If a function is continuous on [a,b] and differentiable on (a,b), there exists at least one c in (a,b) where f'(c) = [f(b) - f(a)] / (b - a). The instantaneous slope at c equals the average slope over the whole interval. If your average highway speed was 75 mph, the MVT guarantees your speedometer read exactly 75 mph at least once."
+            },
+            {
+              "title": "L'Hopital's Rule",
+              "body": "When evaluating limits of ratios f(x)/g(x) that produce the indeterminate form 0/0 (or inf/inf), take the derivative of numerator and denominator separately: lim f(x)/g(x) = lim f'(x)/g'(x). When functions race toward zero, their slopes (derivatives) control the final ratio. This is a direct application of derivative thinking."
+            }
+          ]
+        },
+        {
+          "id": "ch2-sec1-applications",
+          "type": "applications",
+          "label": "Real-World",
+          "heading": "Real-World Applications",
+          "applications": [
+            {
+              "field": "Physics (Kinematics)",
+              "description": "If f(t) is an object's position over time, then f'(t) is its velocity and f''(t) is its acceleration. Derivatives are the native language of motion — from falling objects to orbital mechanics."
+            },
+            {
+              "field": "Economics (Marginal Analysis)",
+              "description": "In economics, 'marginal' literally means derivative. Marginal cost is the derivative of the total cost function — the cost of producing one more unit. Setting the profit function's derivative to zero finds the optimal production level."
+            },
+            {
+              "field": "Machine Learning (Gradient Descent)",
+              "description": "Training a neural network minimises a loss function. The direction to update each weight is given by the gradient — a vector of partial derivatives. Gradient descent iteratively steps in the direction of steepest descent using derivatives at every step."
+            },
+            {
+              "field": "Engineering (Linearisation)",
+              "description": "Engineers use the Microscope Equation constantly to approximate complex nonlinear systems over tiny intervals as simple straight lines — turning intractable equations into solvable ones. Control systems, signal processing, and structural analysis all rely on this technique."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

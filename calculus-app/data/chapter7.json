@@ -1,0 +1,330 @@
+{
+  "id": "ch7",
+  "title": "Advanced Integration Techniques",
+  "subtitle": "U-Substitution, Integration by Parts, and Improper Integrals",
+  "sections": [
+    {
+      "id": "ch7-sec1",
+      "title": "Advanced Integration Techniques",
+      "subsections": [
+        {
+          "id": "ch7-sec1-intuition",
+          "type": "intuition",
+          "label": "Intuition First",
+          "heading": "The Need for Unscrambling",
+          "body": "In earlier chapters, we learned basic rules for anti-derivatives. But what happens when you encounter a function inside another function, or two completely different types of functions multiplied together? Basic reverse-power rules fail here. We need advanced unscrambling techniques — ways to transform an impossible-looking integral into a manageable one.",
+          "analogy": {
+            "title": "Three Analogies for Three Techniques",
+            "body": "Russian Nesting Doll (U-Substitution): The Chain Rule handles nested functions — an inner doll wrapped inside an outer one. Finding the integral of such a function means putting the dolls back together. U-Substitution defines the inner doll as a simple temporary variable u, hiding the messy complexity and transforming the impossible integral into a basic one.\n\nTeam Project (Integration by Parts): The Product Rule handles the derivative of two functions multiplied together. Integration by Parts reverses it. Two very different workers (say, a polynomial x and a trig function cos x) are multiplying their efforts. The formula trades a difficult multiplied integral for a simpler one by differentiating one part and integrating the other.\n\nInfinite Fence (Improper Integrals): A fence stretches infinitely far but gets shorter and shorter the further it goes. Painting it seems to need infinite paint — yet if the fence shrinks fast enough, the total area is actually finite. Improper integrals quantify this: infinite domains can have finite areas.",
+            "keyPoints": [
+              "U-Substitution reverses the Chain Rule: let u = g(x), du = g'(x)dx, then ∫f(g(x))g'(x)dx = ∫f(u)du.",
+              "Integration by Parts reverses the Product Rule: ∫u dv = uv - ∫v du. Choose u to simplify when differentiated.",
+              "Improper Integrals replace ∞ with a variable and take a limit: ∫ₐ^∞ f(x)dx = lim(b→∞) ∫ₐᵇ f(x)dx.",
+              "Some functions (e^(-x²), sin(x²)) have NO algebraic anti-derivative — numerical methods are required."
+            ]
+          }
+        },
+        {
+          "id": "ch7-sec1-concepts",
+          "type": "concepts",
+          "label": "Formal Concepts",
+          "heading": "Formal Concepts & Definitions",
+          "definitions": [
+            {
+              "term": "U-Substitution",
+              "definition": "A technique for integrating composite functions, reversing the Chain Rule. If the integral has the form ∫f(g(x))·g'(x)dx, set u = g(x) and du = g'(x)dx. The integral becomes ∫f(u)du — often trivially solvable. After integrating, substitute back: replace u with g(x)."
+            },
+            {
+              "term": "The du Differential",
+              "definition": "When you set u = g(x), the differential du = g'(x)dx. This replaces the entire g'(x)dx portion of the integral. Every x (and dx) must be replaced by u and du before integrating — if any x remains, the substitution is incomplete."
+            },
+            {
+              "term": "Changing Integration Limits (Definite U-Sub)",
+              "definition": "For definite integrals with U-Substitution, you MUST convert the x-boundaries into u-boundaries using u = g(x). Plug each x-limit into u = g(x) to get the corresponding u-limit. This avoids resubstituting back to x at the end."
+            },
+            {
+              "term": "Integration by Parts",
+              "definition": "Reverses the Product Rule. Formula: ∫u dv = uv - ∫v du. Assign u to the factor that simplifies when differentiated (polynomials, ln x). Assign dv to the factor you can easily integrate (eˣ, sin x, cos x). Compute du = u', then v = ∫dv."
+            },
+            {
+              "term": "LIATE Rule (Choosing u)",
+              "definition": "A mnemonic for choosing u in Integration by Parts: Logarithms > Inverse trig > Algebraic (polynomials) > Trigonometric > Exponential. Choose u as whichever appears earliest in this list. The goal: du should be simpler than u."
+            },
+            {
+              "term": "Improper Integral (Infinite Limit)",
+              "definition": "∫ₐ^∞ f(x)dx = lim(b→∞) ∫ₐᵇ f(x)dx. Replace ∞ with a finite variable b, evaluate the definite integral, then take the limit as b→∞. If the limit exists (is a finite number), the integral converges. If not, it diverges."
+            },
+            {
+              "term": "Convergence vs. Divergence",
+              "definition": "A improper integral converges if its limit is a finite number — the infinite region has measurable finite area. It diverges if the limit is ±∞ or does not exist. Example: ∫₁^∞ 1/x² dx converges to 1, but ∫₁^∞ 1/x dx diverges to infinity."
+            },
+            {
+              "term": "Partial Fractions",
+              "definition": "A technique for integrating rational functions (polynomials divided by polynomials). Decompose the complex fraction into a sum of simpler fractions with known anti-derivatives. Example: 1/(x²-1) = (1/2)/(x-1) - (1/2)/(x+1), each integrable as a logarithm."
+            },
+            {
+              "term": "Non-Elementary Functions",
+              "definition": "Some functions — like e^(-x²) or sin(x²) — provably have no algebraic anti-derivative expressible in elementary functions. No matter how clever the technique, an exact symbolic formula cannot exist. Numerical methods (Riemann sums, Gaussian quadrature) are the only option."
+            }
+          ]
+        },
+        {
+          "id": "ch7-sec1-examples",
+          "type": "examples",
+          "label": "Examples",
+          "heading": "Step-by-Step Examples",
+          "examples": [
+            {
+              "level": "Basic",
+              "title": "U-Substitution: ∫2x·e^(x²) dx",
+              "problem": "Evaluate ∫2x·e^(x²) dx using U-Substitution.",
+              "steps": [
+                "Identify the inner function trapped inside eˣ: u = x².",
+                "Find du: du/dx = 2x → du = 2x dx.",
+                "Spot the match: the integral has e^(x²) and 2x dx. Substitute: ∫eᵘ du.",
+                "Integrate: ∫eᵘ du = eᵘ + C.",
+                "Resubstitute u = x²: answer is e^(x²) + C.",
+                "Verify: d/dx[e^(x²)] = e^(x²)·2x = 2x·e^(x²). ✓"
+              ],
+              "result": "∫2x·e^(x²) dx = e^(x²) + C"
+            },
+            {
+              "level": "Intermediate",
+              "title": "Integration by Parts: ∫x·cos(x) dx",
+              "problem": "Evaluate ∫x·cos(x) dx using Integration by Parts.",
+              "steps": [
+                "Identify: two different types — polynomial x and trig cos(x).",
+                "LIATE rule: Algebraic before Trigonometric → choose u = x.",
+                "Assign: u = x, dv = cos(x)dx.",
+                "Compute: du = dx, and v = ∫cos(x)dx = sin(x).",
+                "Apply formula ∫u dv = uv - ∫v du: x·sin(x) - ∫sin(x)dx.",
+                "Evaluate remaining integral: ∫sin(x)dx = -cos(x).",
+                "Combine: x·sin(x) - (-cos(x)) + C = x·sin(x) + cos(x) + C.",
+                "Verify: d/dx[x·sin(x) + cos(x)] = sin(x) + x·cos(x) - sin(x) = x·cos(x). ✓"
+              ],
+              "result": "∫x·cos(x) dx = x·sin(x) + cos(x) + C"
+            },
+            {
+              "level": "Advanced",
+              "title": "Improper Integral: ∫₁^∞ (1/x²) dx",
+              "problem": "Evaluate ∫₁^∞ (1/x²) dx — an infinite region.",
+              "steps": [
+                "Replace ∞ with a finite variable b: lim(b→∞) ∫₁ᵇ x⁻² dx.",
+                "Integrate using power rule: F(x) = x⁻¹/(-1) = -1/x.",
+                "Evaluate bounds: [-1/x]₁ᵇ = -1/b - (-1/1) = -1/b + 1.",
+                "Take the limit as b→∞: lim(b→∞)(-1/b + 1) = 0 + 1 = 1.",
+                "The integral converges — the infinite region has finite area = 1."
+              ],
+              "result": "∫₁^∞ (1/x²) dx = 1  (converges)"
+            }
+          ]
+        },
+        {
+          "id": "ch7-sec1-visual",
+          "type": "visual",
+          "label": "Visual",
+          "heading": "Visual Understanding",
+          "graph": {
+            "type": "integral",
+            "defaultExpression": "1/x^2",
+            "xRange": [0.5, 6],
+            "yRange": [-0.2, 4],
+            "limitA": 1,
+            "limitB": 5,
+            "label": "f(x) = 1/x²"
+          },
+          "visualNotes": [
+            "Improper Integral Geometry: f(x) = 1/x² swoops down from infinity at x=0, approaching the x-axis but never touching it. Extend the right boundary further and further — the shaded area creeps up toward 1 but never exceeds it. The infinite tail contributes vanishingly small amounts.",
+            "U-Substitution Geometry: Setting u = g(x) stretches or compresses the x-axis. The messy curved shape in x-coordinates becomes a clean simple shape in u-coordinates — same total area, different geometric representation.",
+            "Convergence intuition: Compare 1/x² (converges, ∫₁^∞ = 1) with 1/x (diverges, ∫₁^∞ = ∞). Both go to zero as x→∞, but 1/x² shrinks much faster — fast enough that its infinite tail has finite total area.",
+            "Try adjusting the right boundary further right and watch the area approach 1 asymptotically."
+          ]
+        },
+        {
+          "id": "ch7-sec1-code",
+          "type": "code",
+          "label": "Python",
+          "heading": "Python / Computational Section",
+          "snippets": [
+            {
+              "title": "U-Sub and Integration by Parts",
+              "code": "from sympy import symbols, integrate, cos, exp, sin, log\n\nx = symbols('x')\n\n# SymPy handles U-Substitution automatically\nf_sub = 2 * x * exp(x**2)\nprint(\"U-Sub: ∫2x·e^(x²) dx =\", integrate(f_sub, x))\n# Output: exp(x**2)\n\n# SymPy handles Integration by Parts automatically\nf_parts = x * cos(x)\nprint(\"By Parts: ∫x·cos(x) dx =\", integrate(f_parts, x))\n# Output: x*sin(x) + cos(x)\n\n# Another by-parts example: ∫x·eˣ dx\nf_parts2 = x * exp(x)\nprint(\"By Parts: ∫x·eˣ dx =\", integrate(f_parts2, x))\n# Output: (x-1)*exp(x)\n\n# Logarithm case: ∫ln(x) dx\nf_log = log(x)\nprint(\"By Parts: ∫ln(x) dx =\", integrate(f_log, x))\n# Output: x*log(x) - x"
+            },
+            {
+              "title": "Improper Integrals",
+              "code": "from sympy import symbols, integrate, oo, exp\n\nx = symbols('x')\n\n# ∫₁^∞ 1/x² dx — converges\narea1 = integrate(1/x**2, (x, 1, oo))\nprint(\"∫₁^∞ 1/x² dx =\", area1)     # 1\n\n# ∫₁^∞ 1/x dx — diverges!\narea2 = integrate(1/x, (x, 1, oo))\nprint(\"∫₁^∞ 1/x dx =\", area2)       # oo\n\n# Present Value: ∫₀^∞ 5000·e^(-0.05t) dt\nt = symbols('t', positive=True)\npv = integrate(5000 * exp(-0.05*t), (t, 0, oo))\nprint(\"Present Value =\", pv)          # 100000.0\n\n# ∫₋∞^∞ e^(-x²) dx — the Gaussian integral\nfrom sympy import sqrt, pi\ngauss = integrate(exp(-x**2), (x, -oo, oo))\nprint(\"Gaussian integral =\", gauss)   # sqrt(pi)"
+            },
+            {
+              "title": "When Analytics Fail — Numerical",
+              "code": "import numpy as np\n\n# e^(-x^2) has NO algebraic anti-derivative\n# We must use numerical integration\ndef f(x):\n    return np.exp(-x**2)\n\ndef trap_integral(f, a, b, n=10000):\n    x = np.linspace(a, b, n+1)\n    y = f(x)\n    return np.trapz(y, x)\n\n# Approximate ∫₋₃³ e^(-x²) dx\n# Exact (full integral): sqrt(pi) ≈ 1.7725\nresult = trap_integral(f, -3, 3)\nprint(f\"∫₋₃³ e^(-x²) dx ≈ {result:.6f}\")\nprint(f\"sqrt(pi)         = {np.sqrt(np.pi):.6f}\")\nprint(f\"Error            = {abs(result - np.sqrt(np.pi)):.8f}\")\n\n# Convergence demo: sin(x²)\ndef g(x):\n    return np.sin(x**2)\n\nprint(f\"\\n∫₀⁴ sin(x²) dx ≈ {trap_integral(g, 0, 4):.6f}\")\nprint(\"(No algebraic anti-derivative exists)\")"
+            }
+          ]
+        },
+        {
+          "id": "ch7-sec1-quiz",
+          "type": "quiz",
+          "label": "Quiz",
+          "heading": "Quiz",
+          "questions": [
+            {
+              "id": "q1",
+              "text": "For ∫2x·e^(x²) dx, the correct substitution is:",
+              "options": [
+                "u = e^(x²), du = 2x·e^(x²) dx",
+                "u = x², du = 2x dx",
+                "u = 2x, du = 2 dx",
+                "u = x²+1, du = x dx"
+              ],
+              "correct": 1,
+              "explanation": "Set u = x² (the inner function inside eˣ), then du = 2x dx. The original 2x·dx in the integral matches du exactly, giving ∫eᵘ du = eᵘ + C = e^(x²) + C."
+            },
+            {
+              "id": "q2",
+              "text": "In Integration by Parts ∫u dv = uv - ∫v du, for the integral ∫x·eˣ dx, the best choice is:",
+              "options": [
+                "u = eˣ, dv = x dx",
+                "u = x, dv = eˣ dx",
+                "u = xeˣ, dv = dx",
+                "u = 1, dv = xeˣ dx"
+              ],
+              "correct": 1,
+              "explanation": "LIATE: Algebraic (x) before Exponential (eˣ). Choose u = x → du = dx (simpler). dv = eˣ dx → v = eˣ (still manageable). Result: xeˣ - ∫eˣ dx = xeˣ - eˣ + C. If you chose u = eˣ, the next integral ∫(x²/2)eˣ dx is more complex — always pick u to simplify."
+            },
+            {
+              "id": "q3",
+              "text": "When evaluating ∫₀¹ x·√(100-x²) dx with u = 100-x², what are the new u-limits?",
+              "options": [
+                "u goes from 0 to 1 (unchanged)",
+                "u goes from 100 to 99",
+                "u goes from 99 to 100",
+                "u goes from 0 to 100"
+              ],
+              "correct": 1,
+              "explanation": "Must convert x-limits to u-limits using u = 100-x². At x=0: u = 100-0 = 100. At x=1: u = 100-1 = 99. So u goes from 100 down to 99. The negative du = -2x dx flips the order back. This is the deadliest trap in definite U-Sub — always convert the limits."
+            },
+            {
+              "id": "q4",
+              "text": "∫₁^∞ (1/x) dx compared to ∫₁^∞ (1/x²) dx:",
+              "options": [
+                "Both diverge to infinity",
+                "Both converge to finite numbers",
+                "1/x diverges; 1/x² converges to 1",
+                "1/x converges to 1; 1/x² diverges"
+              ],
+              "correct": 2,
+              "explanation": "∫₁^∞ (1/x)dx = lim[ln(b)] = ∞ — diverges. ∫₁^∞ (1/x²)dx = lim[-1/b + 1] = 1 — converges. Both functions go to zero, but 1/x² shrinks much faster. The p-test: ∫₁^∞ 1/xᵖ dx converges if and only if p > 1."
+            },
+            {
+              "id": "q5",
+              "text": "Which function provably has NO algebraic anti-derivative?",
+              "options": [
+                "sin(x)",
+                "x·cos(x)",
+                "e^(-x²)",
+                "1/x"
+              ],
+              "correct": 2,
+              "explanation": "e^(-x²) — the Gaussian function — has been proven to have no anti-derivative expressible in elementary functions. This is why statisticians use numerical methods to evaluate normal distribution probabilities. sin(x) → -cos(x); x·cos(x) → integration by parts; 1/x → ln|x|."
+            }
+          ]
+        },
+        {
+          "id": "ch7-sec1-practice",
+          "type": "practice",
+          "label": "Practice",
+          "heading": "Practice Problems",
+          "problems": [
+            {
+              "level": "Easy",
+              "label": "U-Substitution",
+              "problem": "Evaluate ∫8x·e^(x²) dx.",
+              "hint": "Let u = x². Find du, spot the match with 8x dx (factor out a 4 to match 2x dx), then substitute.",
+              "solution": "Let u = x², du = 2x dx. Rewrite 8x dx = 4·(2x dx) = 4 du.\nIntegral becomes: 4∫eᵘ du = 4eᵘ + C.\nResubstitute: 4e^(x²) + C.\nVerify: d/dx[4e^(x²)] = 4·e^(x²)·2x = 8x·e^(x²). ✓"
+            },
+            {
+              "level": "Medium",
+              "label": "Integration by Parts",
+              "problem": "Evaluate ∫x·eˣ dx.",
+              "hint": "LIATE: Algebraic x comes before Exponential eˣ. Let u = x and dv = eˣ dx. Compute du and v, then apply ∫u dv = uv - ∫v du.",
+              "solution": "u = x → du = dx.\ndv = eˣ dx → v = eˣ.\n∫x·eˣ dx = x·eˣ - ∫eˣ dx = xeˣ - eˣ + C = eˣ(x-1) + C.\nVerify: d/dx[eˣ(x-1)] = eˣ(x-1) + eˣ = eˣ·x = x·eˣ. ✓"
+            },
+            {
+              "level": "Hard",
+              "label": "Definite U-Substitution",
+              "problem": "Evaluate ∫₀¹ x·√(100-x²) dx exactly.",
+              "hint": "Let u = 100-x². Find du. Then convert the x-limits (x=0 and x=1) into u-limits. This avoids resubstituting at the end.",
+              "solution": "Let u = 100-x², du = -2x dx → x dx = -du/2.\nConvert limits: x=0 → u=100; x=1 → u=99.\nIntegral: ∫₁₀₀⁹⁹ √u·(-1/2)du = (1/2)∫₉₉¹⁰⁰ u^(1/2) du.\nIntegrate: (1/2)·[u^(3/2)/(3/2)]₉₉¹⁰⁰ = (1/3)[u^(3/2)]₉₉¹⁰⁰.\nEvaluate: (1/3)[100^(3/2) - 99^(3/2)] = (1/3)[1000 - 99√99]."
+            },
+            {
+              "level": "Real-World",
+              "label": "Economics",
+              "problem": "An investment generates $5,000 per year continuously. The continuous discount rate is 5% (r = 0.05). The Present Value of this infinite income stream is PV = ∫₀^∞ 5000·e^(-0.05t) dt. Find the exact PV.",
+              "hint": "Use U-Substitution with u = -0.05t. The anti-derivative of e^(-0.05t) is e^(-0.05t)/(-0.05). Then take the limit as the upper bound → ∞, noting that e^(-∞) = 0.",
+              "solution": "PV = lim(b→∞) ∫₀ᵇ 5000·e^(-0.05t) dt.\nAnti-derivative: 5000·e^(-0.05t)/(-0.05) = -100,000·e^(-0.05t).\nEvaluate: lim(b→∞) [-100,000·e^(-0.05b) - (-100,000·e⁰)].\ne^(-0.05b) → 0 as b→∞. e⁰ = 1.\nPV = 0 + 100,000 = $100,000.\nThe infinite income stream is worth exactly $100,000 today."
+            }
+          ]
+        },
+        {
+          "id": "ch7-sec1-mistakes",
+          "type": "mistakes",
+          "label": "Common Mistakes",
+          "heading": "Common Mistakes & Misconceptions",
+          "mistakes": [
+            {
+              "title": "Forgetting to Change Integration Limits (The Deadliest Trap)",
+              "description": "When using U-Substitution on a definite integral, students substitute for the variable but evaluate using the old x-boundaries instead of converting them. If you change the axis from x to u, x=0 does not mean u=0. You MUST plug each old x-boundary into u = g(x) to get the corresponding u-boundary. Evaluating with wrong limits gives a completely wrong numerical answer."
+            },
+            {
+              "title": "The Infinite Area Fallacy",
+              "description": "Human intuition assumes that a region stretching to infinity must have infinite area. Students write 'diverges' without calculating. Many infinite-domain functions converge to perfectly finite numbers — ∫₁^∞ 1/x² dx = 1 — if the tail compresses fast enough. Always compute the limit; never assume divergence."
+            },
+            {
+              "title": "Choosing the Wrong u in Integration by Parts",
+              "description": "Picking u = eˣ and dv = x dx gives v = x²/2 and the next integral becomes ∫(x²/2)eˣ dx — more complex than what you started with. Always choose u so that du is simpler than u. Use LIATE: Logarithms > Inverse trig > Algebraic > Trig > Exponential. The goal is a simpler ∫v du."
+            }
+          ]
+        },
+        {
+          "id": "ch7-sec1-advanced",
+          "type": "advanced",
+          "label": "Advanced Insights",
+          "heading": "Advanced Insights",
+          "insights": [
+            {
+              "title": "When Analytical Integration is Impossible",
+              "body": "Advanced integration teaches us humility. While differentiation is purely mechanical — apply the rules, get the answer — integration is an art. Functions as deceptively simple as sin(x²) or e^(-x²) provably have no algebraic anti-derivative expressible in elementary functions. The error function erf(x) = (2/√π)∫₀ˣ e^(-t²)dt is defined entirely as an integral with no closed form. When symbolic rules fail, numerical algorithms — Euler's Method, Runge-Kutta, Gaussian quadrature — are the only recourse."
+            },
+            {
+              "title": "Extending to Higher Dimensions",
+              "body": "U-Substitution and Integration by Parts form the foundation for multi-variable integration. U-substitution extends to the Jacobian Matrix — the factor that corrects area/volume when changing coordinate systems in 2D or 3D integrals (from Cartesian to polar, cylindrical, or spherical). Integration by Parts, iterated in higher dimensions, leads directly to Green's Theorem, Stokes' Theorem, and the Divergence Theorem — the cornerstones of electromagnetism, fluid mechanics, and differential geometry."
+            }
+          ]
+        },
+        {
+          "id": "ch7-sec1-applications",
+          "type": "applications",
+          "label": "Real-World",
+          "heading": "Real-World Applications",
+          "applications": [
+            {
+              "field": "Physics (Air Resistance & Terminal Velocity)",
+              "description": "A projectile subject to air resistance has deceleration proportional to v² (a = -kv²). Finding velocity requires solving dv/dt = -kv² by separating variables and integrating both sides — often requiring partial fractions or substitution. The resulting function describes terminal velocity: the speed at which drag exactly cancels gravity."
+            },
+            {
+              "field": "Data Science (Probability Distributions)",
+              "description": "The total area under any probability density function must equal 1. For the normal bell curve, this means ∫₋∞^∞ e^(-x²/2)dx = √(2π) — an improper integral with no algebraic anti-derivative, evaluated by a trick using polar coordinates. All z-scores and p-values in statistics are evaluations of this improper integral numerically."
+            },
+            {
+              "field": "Economics (Present Value of Infinite Streams)",
+              "description": "The Present Value of a continuous income stream I(t) discounted at rate r over infinite time is PV = ∫₀^∞ I(t)·e^(-rt) dt. If I(t) is constant, this is a simple improper integral. If I(t) grows over time, U-Substitution or Integration by Parts is required. Convergence means the investment has finite value today."
+            },
+            {
+              "field": "Engineering (Vector Fields & Flux)",
+              "description": "Green's Theorem, Stokes' Theorem, and the Divergence Theorem — the grand unifying theorems of vector calculus — are all higher-dimensional extensions of Integration by Parts. Engineers use them to compute total electric flux through a surface, fluid flow through a pipe network, and heat dissipation across a 3D boundary."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "id": "ch3",
+  "title": "Rules of Differentiation",
+  "subtitle": "Super Shortcuts for Derivatives",
+  "sections": [
+    {
+      "id": "ch3-sec1",
+      "title": "Differentiation Rules",
+      "subsections": [
+        {
+          "id": "ch3-sec1-intuition",
+          "type": "intuition",
+          "label": "Intuition First",
+          "heading": "The Need for Super Shortcuts",
+          "body": "In the previous chapter, we found derivatives using the formal limit definition. While mathematically robust, doing this for complex equations is tedious. Think of the limit definition as walking to a destination; the rules of differentiation are the cars, trains, and planes that get you there infinitely faster. These rules are patterns we notice every time we take a limit — once spotted, they let us bypass the limit entirely.",
+          "analogy": {
+            "title": "The Gear Analogy (Chain Rule) & Teamwork Analogy (Product/Quotient Rule)",
+            "body": "Chain Rule — Interlocking Gears: If gear A turns twice as fast as gear B, and gear B turns three times as fast as gear C, gear A turns 2×3=6 times as fast as gear C. You multiply the rates. When a function is nested inside another (like an onion), you cannot just differentiate the outside — you multiply the rate of the outer layer by the rate of the inner layer.\n\nProduct Rule — Company Revenue: If your revenue = (units sold) × (price per item), and both are changing simultaneously, you cannot just multiply the two rates. The Product Rule tells you exactly how to handle this.",
+            "keyPoints": [
+              "Power Rule: d/dx(xⁿ) = nxⁿ⁻¹ — bring the exponent down, subtract one.",
+              "Chain Rule: d/dx[f(g(x))] = f'(g(x)) · g'(x) — outer derivative times inner derivative.",
+              "Product Rule: (uv)' = u'v + uv' — first times deriv of second plus second times deriv of first.",
+              "Quotient Rule: (u/v)' = (vu' - uv') / v² — lo d-hi minus hi d-lo over lo squared."
+            ]
+          }
+        },
+        {
+          "id": "ch3-sec1-concepts",
+          "type": "concepts",
+          "label": "Formal Concepts",
+          "heading": "Formal Concepts & Definitions",
+          "definitions": [
+            { "term": "Constant Rule", "definition": "d/dx(c) = 0. The derivative of any constant is zero — a constant never changes, so its rate of change is zero." },
+            { "term": "Constant Multiple Rule", "definition": "d/dx[c·f(x)] = c·f'(x). A constant multiplier just carries through differentiation unchanged." },
+            { "term": "Sum / Difference Rule", "definition": "d/dx[f(x) ± g(x)] = f'(x) ± g'(x). Derivatives distribute over addition and subtraction." },
+            { "term": "Power Rule", "definition": "d/dx(xⁿ) = n·xⁿ⁻¹ for any real n. Bring the exponent down as a multiplier and reduce the exponent by one. Works for negative and fractional exponents too." },
+            { "term": "Product Rule", "definition": "If y = u(x)·v(x), then y' = u'v + uv'. First times derivative of second, plus second times derivative of first." },
+            { "term": "Quotient Rule", "definition": "If y = u(x)/v(x), then y' = (vu' - uv') / v². Derivative of top times bottom minus derivative of bottom times top, all over bottom squared." },
+            { "term": "Chain Rule", "definition": "If y = f(g(x)), then y' = f'(g(x)) · g'(x). Differentiate the outer function (leaving inner untouched) then multiply by the derivative of the inner function." },
+            { "term": "d/dx(sin x)", "definition": "= cos x. The derivative of sine is cosine." },
+            { "term": "d/dx(cos x)", "definition": "= -sin x. The derivative of cosine is negative sine." },
+            { "term": "d/dx(eˣ)", "definition": "= eˣ. The exponential function is its own derivative — the unique function that grows proportionally to itself." },
+            { "term": "d/dx(ln x)", "definition": "= 1/x. The derivative of the natural log is the reciprocal." },
+            { "term": "Second Derivative f''(x)", "definition": "The derivative of the derivative. f''(x) > 0 means concave up (holds water). f''(x) < 0 means concave down (sheds water). Used to classify critical points as maxima or minima." }
+          ]
+        },
+        {
+          "id": "ch3-sec1-examples",
+          "type": "examples",
+          "label": "Examples",
+          "heading": "Step-by-Step Examples",
+          "examples": [
+            {
+              "level": "Basic",
+              "title": "Power Rule + Sum Rule on a Polynomial",
+              "problem": "Find p'(x) for p(x) = 2x⁴ + 7x³ + 6x² + 2x + 15.",
+              "steps": [
+                "Apply the Sum Rule: differentiate term by term from left to right.",
+                "(2x⁴)' = 2·4x³ = 8x³",
+                "(7x³)' = 7·3x² = 21x²",
+                "(6x²)' = 6·2x = 12x",
+                "(2x)' = 2·1 = 2",
+                "(15)' = 0  (constant rule)",
+                "Combine: p'(x) = 8x³ + 21x² + 12x + 2"
+              ],
+              "result": "p'(x) = 8x³ + 21x² + 12x + 2"
+            },
+            {
+              "level": "Intermediate",
+              "title": "Quotient Rule",
+              "problem": "Find f'(x) for f(x) = (x² - 4x) / (x + 2).",
+              "steps": [
+                "Identify top u(x) = x² - 4x and bottom v(x) = x + 2.",
+                "Find derivatives: u'(x) = 2x - 4, v'(x) = 1.",
+                "Apply Quotient Rule: (vu' - uv') / v².",
+                "Numerator: (x+2)(2x-4) - (x²-4x)(1).",
+                "Expand: (2x² - 4x + 4x - 8) - (x² - 4x) = 2x² - 8 - x² + 4x = x² + 4x - 8.",
+                "Denominator: (x+2)²."
+              ],
+              "result": "f'(x) = (x² + 4x - 8) / (x + 2)²"
+            },
+            {
+              "level": "Advanced",
+              "title": "Chain Rule (Nested Functions)",
+              "problem": "Find f'(x) for f(x) = √(5x² + 3).",
+              "steps": [
+                "Rewrite: f(x) = (5x² + 3)^(1/2).",
+                "Outer function: (·)^(1/2). Inner function: 5x² + 3.",
+                "Differentiate outer (leave inner untouched): (1/2)(5x² + 3)^(-1/2).",
+                "Differentiate inner: d/dx[5x² + 3] = 10x.",
+                "Multiply by Chain Rule: (1/2)(5x² + 3)^(-1/2) · 10x.",
+                "Simplify: 5x / √(5x² + 3)."
+              ],
+              "result": "f'(x) = 5x / √(5x² + 3)"
+            }
+          ]
+        },
+        {
+          "id": "ch3-sec1-visual",
+          "type": "visual",
+          "label": "Visual",
+          "heading": "Visual Understanding",
+          "graph": {
+            "type": "derivative",
+            "defaultExpression": "2*x^4 + 7*x^3 + 6*x^2 + 2*x + 15",
+            "xRange": [-3, 1.5],
+            "yRange": [-5, 40],
+            "showDerivative": true,
+            "showTangent": true,
+            "tangentPoint": -1
+          },
+          "visualNotes": [
+            "Concavity: Where f''(x) > 0 the curve is concave up (cups water). Where f''(x) < 0 it is concave down (sheds water). The inflection point is where concavity flips.",
+            "Optimization: At a maximum or minimum, the tangent line is perfectly flat — slope = 0. Setting f'(x) = 0 locates these peaks and valleys precisely.",
+            "Power Rule geometrically: The area of a square with side x is x². A tiny increase dx adds two thin strips of area x·dx each, giving a total rate 2x — exactly what the power rule says."
+          ]
+        },
+        {
+          "id": "ch3-sec1-code",
+          "type": "code",
+          "label": "Python",
+          "heading": "Python / Computational Section",
+          "snippets": [
+            {
+              "title": "Basic Differentiation Rules",
+              "code": "from sympy import symbols, diff, sqrt, cos, exp, sin\n\nx = symbols('x')\n\n# Power Rule\nf1 = x**4\nprint(\"d/dx(x^4) =\", diff(f1, x))  # 4x^3\n\n# Polynomial\np  = 2*x**4 + 7*x**3 + 6*x**2 + 2*x + 15\nprint(\"p'(x) =\", diff(p, x))\n\n# Chain Rule — trig\nf2 = cos(x**2)\nprint(\"d/dx[cos(x^2)] =\", diff(f2, x))  # -2x*sin(x^2)\n\n# Chain Rule — exponential\nf3 = exp(x**2)\nprint(\"d/dx[e^(x^2)] =\", diff(f3, x))  # 2x*e^(x^2)"
+            },
+            {
+              "title": "Higher-Order Derivatives",
+              "code": "from sympy import symbols, diff\n\nx = symbols('x')\nf = x**4\n\n# Second derivative of x^4\nprint(\"f''(x)  =\", diff(f, x, 2))  # 12x^2\n\n# Fourth derivative of x^4\nprint(\"f''''(x) =\", diff(f, x, 4))  # 24\n\n# Concavity check\ng   = x**3 - 6*x**2\ndg  = diff(g, x)          # 3x^2 - 12x\ndg2 = diff(g, x, 2)       # 6x - 12\nprint(\"g'(x)  =\", dg)\nprint(\"g''(x) =\", dg2)\nprint(\"Concavity at x=3:\", dg2.subs(x, 3))  # positive = concave up"
+            },
+            {
+              "title": "Slope at a Point",
+              "code": "from sympy import symbols, diff\n\nx = symbols('x')\nf  = x**3 - 6*x**2\n\n# Take the derivative\ndf = diff(f, x)  # 3x^2 - 12x\nprint(\"f'(x) =\", df)\n\n# Slope at x = -3\nslope = df.subs(x, -3)\nprint(\"Slope at x=-3:\", slope)  # 63\n\n# Marginal cost example\nC  = 25 + x**3 / 5\ndC = diff(C, x)\nprint(\"Marginal cost C'(x) =\", dC)          # 3x^2/5\nprint(\"Marginal cost at x=10:\", dC.subs(x, 10))  # 60"
+            }
+          ]
+        },
+        {
+          "id": "ch3-sec1-quiz",
+          "type": "quiz",
+          "label": "Quiz",
+          "heading": "Quiz",
+          "questions": [
+            {
+              "id": "q1",
+              "text": "Using the Power Rule, what is d/dx(x⁷)?",
+              "options": ["x⁶", "7x⁷", "7x⁶", "6x⁷"],
+              "correct": 2,
+              "explanation": "Power Rule: d/dx(xⁿ) = n·xⁿ⁻¹. Bring the exponent (7) down as a multiplier and subtract 1 from the exponent: 7x⁷⁻¹ = 7x⁶."
+            },
+            {
+              "id": "q2",
+              "text": "What is d/dx(eˣ)?",
+              "options": ["x·eˣ⁻¹", "eˣ", "e", "x·eˣ"],
+              "correct": 1,
+              "explanation": "The exponential function eˣ is its own derivative — it is the unique function that grows proportionally to itself. Never apply the Power Rule to eˣ; the Power Rule is only for variable bases with constant exponents."
+            },
+            {
+              "id": "q3",
+              "text": "To differentiate f(x) = (x² + 1)¹⁰, which rule do you need?",
+              "options": ["Power Rule alone", "Product Rule", "Chain Rule", "Quotient Rule"],
+              "correct": 2,
+              "explanation": "There is a function (x²+1) nested inside a power function — the classic case for the Chain Rule. Result: 10(x²+1)⁹ · 2x = 20x(x²+1)⁹. Forgetting the ·2x is the most common mistake."
+            },
+            {
+              "id": "q4",
+              "text": "If f''(x) < 0 at a point x₀, what can you say about the graph of f at that point?",
+              "options": [
+                "f is increasing at x₀",
+                "f has a local minimum at x₀",
+                "f is concave down at x₀",
+                "f'(x₀) = 0"
+              ],
+              "correct": 2,
+              "explanation": "The second derivative describes concavity. f''(x) < 0 means concave down — like an umbrella or a hill. f''(x) > 0 means concave up — like a cup or a valley."
+            },
+            {
+              "id": "q5",
+              "text": "The Quotient Rule formula for d/dx[u/v] is:",
+              "options": [
+                "(u'v') / (v²)",
+                "(u'v - uv') / v²",
+                "(vu' - uv') / v²",
+                "(uv' - vu') / v"
+              ],
+              "correct": 2,
+              "explanation": "Quotient Rule: (vu' - uv') / v². Remember: derivative of top times bottom, minus derivative of bottom times top, all over bottom squared. The order matters — swapping gives the wrong sign."
+            }
+          ]
+        },
+        {
+          "id": "ch3-sec1-practice",
+          "type": "practice",
+          "label": "Practice",
+          "heading": "Practice Problems",
+          "problems": [
+            {
+              "level": "Easy",
+              "label": "Concept Check",
+              "problem": "Find the derivative of f(x) = 7x⁵ - 4x⁴ + 3x² + 40.",
+              "hint": "Apply the Power Rule to each term separately using the Sum Rule.",
+              "solution": "f'(x) = 7(5x⁴) - 4(4x³) + 3(2x) + 0 = 35x⁴ - 16x³ + 6x"
+            },
+            {
+              "level": "Medium",
+              "label": "Application",
+              "problem": "Using the Product Rule, find y' for y = (x² + 4x - 11)(6x³ - √x).",
+              "hint": "Let u = x² + 4x - 11 and v = 6x³ - x^(1/2). Find u', v', then apply y' = u'v + uv'.",
+              "solution": "u = x² + 4x - 11, u' = 2x + 4.\nv = 6x³ - x^(1/2), v' = 18x² - (1/2)x^(-1/2).\ny' = (2x+4)(6x³ - √x) + (x²+4x-11)(18x² - 1/(2√x))"
+            },
+            {
+              "level": "Hard",
+              "label": "Thinking-Based",
+              "problem": "Differentiate f(x) = cos((4x)²) using the Chain Rule.",
+              "hint": "First simplify (4x)² = 16x². Now you have cos(16x²) — two layers: cosine is outer, 16x² is inner.",
+              "solution": "Simplify: f(x) = cos(16x²).\nOuter: cos(·) → derivative is -sin(·).\nInner: 16x² → derivative is 32x.\nChain Rule: f'(x) = -sin(16x²) · 32x = -32x·sin(16x²)"
+            },
+            {
+              "level": "Real-World",
+              "label": "Economics",
+              "problem": "The total cost to produce x units is C(x) = 25 + (1/5)x³. Find the marginal cost and evaluate it at the 10th unit.",
+              "hint": "Marginal cost = C'(x). Differentiate then substitute x = 10.",
+              "solution": "C'(x) = 0 + (1/5)·3x² = (3/5)x².\nAt x = 10: C'(10) = (3/5)(100) = 60.\nThe cost to produce one additional unit at the 10th unit is $60."
+            }
+          ]
+        },
+        {
+          "id": "ch3-sec1-mistakes",
+          "type": "mistakes",
+          "label": "Common Mistakes",
+          "heading": "Common Mistakes & Misconceptions",
+          "mistakes": [
+            {
+              "title": "The Fraction Trap",
+              "description": "A massive pitfall is differentiating u/v by simply computing u'/v'. This is mathematically illegal. You MUST use the Quotient Rule: (vu' - uv') / v². The derivative of a fraction is NOT the fraction of the derivatives."
+            },
+            {
+              "title": "Applying Power Rule to Exponentials",
+              "description": "Students apply nxⁿ⁻¹ to eˣ, getting x·eˣ⁻¹. Wrong. The Power Rule only works when the BASE is variable and the EXPONENT is constant (like x²). When the base is constant and exponent is variable (like eˣ), the derivative is uniquely eˣ — it is its own derivative."
+            },
+            {
+              "title": "Forgetting the Inner Derivative (Chain Rule)",
+              "description": "When differentiating (x²+1)¹⁰, students write 10(x²+1)⁹ and stop. They forget to multiply by the derivative of the inner function (2x). The correct answer is 20x(x²+1)⁹. Never skip the inner derivative — it is half of the Chain Rule."
+            }
+          ]
+        },
+        {
+          "id": "ch3-sec1-advanced",
+          "type": "advanced",
+          "label": "Advanced Insights",
+          "heading": "Advanced Insights",
+          "insights": [
+            {
+              "title": "Implicit Differentiation",
+              "body": "When a function is mixed (like x² + y² = 3), you cannot isolate y easily. Implicit differentiation takes the derivative of both sides with respect to x. When differentiating a y term, treat y as a nested function and apply the Chain Rule — multiply by dy/dx. Example: 2x + 2y·y' = 0 → y' = -x/y. This works for circles, ellipses, and any curve that fails the vertical line test."
+            },
+            {
+              "title": "Taylor's Theorem (Infinite Polynomials)",
+              "body": "The rules of differentiation allow us to approximate impossibly complex functions (like sin x or eˣ) as simple infinite polynomials. By matching all higher-order derivatives at a point x=0, we build a Maclaurin Series. For example: eˣ = 1 + x + x²/2! + x³/3! + … This perfectly calculates exponential growth using only basic arithmetic — and it is why engineers can compute sin and cos on a chip."
+            }
+          ]
+        },
+        {
+          "id": "ch3-sec1-applications",
+          "type": "applications",
+          "label": "Real-World",
+          "heading": "Real-World Applications",
+          "applications": [
+            {
+              "field": "Physics (Kinematics & Related Rates)",
+              "description": "Position s(t) → velocity s'(t) → acceleration s''(t). Using the Chain Rule, physicists solve related rates problems: if you know how the volume of water in a tank changes, the Chain Rule tells you how fast the height changes."
+            },
+            {
+              "field": "Machine Learning (Backpropagation)",
+              "description": "The Chain Rule IS backpropagation. Training a neural network requires computing how the error changes with respect to each weight — a chain of derivatives applied iteratively through every layer. Without the Chain Rule, gradient descent and all of modern AI is impossible."
+            },
+            {
+              "field": "Economics (Marginal Analysis)",
+              "description": "Marginal cost and marginal revenue are derivatives of their respective functions. Setting the derivative of profit to zero finds the optimal production level. Elasticity of demand is also a derivative — how much does demand change per unit change in price?"
+            },
+            {
+              "field": "Engineering (Newton's Method)",
+              "description": "When equations are too complex to solve algebraically, Newton's Method uses the tangent line (derivative) iteratively. Starting from a guess x₀, the next better guess is x₁ = x₀ - f(x₀)/f'(x₀). This converges to a root extremely quickly and is built into most root-finding software."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

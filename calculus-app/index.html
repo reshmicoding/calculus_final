@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculus Learning Platform</title>
+  <meta name="description" content="An interactive personal Calculus textbook — visualizations, Python, step-by-step solvers, quizzes.">
+
+  <!-- ── Fonts ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- ── KaTeX (math rendering) ── -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+  <!-- ── Math.js (expression evaluation) ── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.js"></script>
+
+  <!-- ── Plotly.js (graphing) ── -->
+  <script src="https://cdn.plot.ly/plotly-2.27.1.min.js"></script>
+
+  <!-- ── Skulpt (Python in browser) ── -->
+  <script src="https://skulpt.org/js/skulpt.min.js" onerror="console.warn('Skulpt failed to load')"></script>
+  <script src="https://skulpt.org/js/skulpt-stdlib.js" onerror="console.warn('Skulpt stdlib failed to load')"></script>
+
+  <!-- ── App Styles ── -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     APP SHELL
+═════════════════════════════════════════════════════════════ -->
+<div id="app">
+
+  <!-- ── Top Bar ── -->
+  <header id="topbar">
+    <a class="brand" href="#" onclick="navigateToChapter('ch1'); return false;">
+      <div class="brand-icon">∫</div>
+      <span class="brand-name">Calculus</span>
+    </a>
+
+    <div id="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Search concepts, theorems, examples… (press /)">
+      <div id="search-results"></div>
+    </div>
+
+    <div class="topbar-actions">
+      <div id="progress-pill">
+        <div class="pill-bar"><div class="pill-fill" style="width:0%"></div></div>
+        <span class="pill-text">0/7 chapters</span>
+      </div>
+      <button class="icon-btn" id="btn-bookmarks" title="Bookmarks (B)">🔖</button>
+      <button class="icon-btn" id="btn-theme" title="Toggle dark mode">🌙</button>
+      <button class="icon-btn" id="btn-sidebar" title="Toggle sidebar" style="display:none">☰</button>
+    </div>
+  </header>
+
+  <!-- ── Sidebar ── -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-label">Contents</div>
+    </div>
+    <div class="chapter-list" id="chapter-list">
+      <!-- Built dynamically by JS -->
+    </div>
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <main id="main">
+    <div id="main-content">
+      <!-- Chapters rendered here by JS -->
+      <div style="display:flex;align-items:center;justify-content:center;height:50vh;flex-direction:column;gap:16px">
+        <div class="spinner" style="width:32px;height:32px;border-width:3px"></div>
+        <p style="color:var(--text-tertiary);font-size:0.9rem">Loading your textbook…</p>
+      </div>
+    </div>
+  </main>
+
+</div><!-- /#app -->
+
+<!-- ── Bookmarks Panel ── -->
+<div id="bookmarks-panel">
+  <h3 class="bookmarks-title">🔖 Bookmarks</h3>
+  <div class="bookmarks-content"></div>
+</div>
+
+<!-- ── Scroll to Top ── -->
+<button id="scroll-top" title="Back to top">↑</button>
+
+<!-- ── App Scripts ── -->
+<script src="js/python-runner.js"></script>
+<script src="js/graph-module.js"></script>
+<script src="js/app.js"></script>
+
+<!-- ── Mobile sidebar toggle visibility ── -->
+<script>
+  (function() {
+    function checkMobile() {
+      const btn = document.getElementById('btn-sidebar');
+      if (btn) btn.style.display = window.innerWidth <= 900 ? 'flex' : 'none';
+    }
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+  })();
+</script>
+
+</body>
+</html>

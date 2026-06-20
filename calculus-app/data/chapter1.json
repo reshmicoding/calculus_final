@@ -1,0 +1,277 @@
+{
+  "id": "ch1",
+  "title": "Introduction to Calculus",
+  "subtitle": "The Study of Change",
+  "sections": [
+    {
+      "id": "ch1-sec1",
+      "title": "What is Calculus?",
+      "subsections": [
+        {
+          "id": "ch1-sec1-intuition",
+          "type": "intuition",
+          "label": "Intuition First",
+          "heading": "What is Calculus?",
+          "body": "Calculus is fundamentally the study of change and the rates of change of mathematical functions. Think of algebra as a tool that provides static, frozen formulas; calculus, on the other hand, evaluates dynamic, moving systems by observing what happens over infinitely small intervals.",
+          "analogy": {
+            "title": "The Dashboard Analogy",
+            "body": "Consider the dashboard of a car. It contains two important instruments: the odometer (which measures total distance traveled) and the speedometer (which measures your instantaneous speed, or velocity).\n\n• Distance (Algebra): If you drive at a constant 60 miles per hour for 2 hours, you have traveled 120 miles. Simple algebra handles this perfectly.\n\n• Velocity (Calculus): But what if your speed is constantly changing—speeding up to merge, slowing down for traffic? The central question of calculus is understanding the exact relationship between your distance record and your velocity at any given split-second.",
+            "keyPoints": [
+              "Differentiation: Finding the velocity (rate of change) from a record of the distance.",
+              "Integration: Computing the total distance traveled from a history of the velocity."
+            ]
+          }
+        },
+        {
+          "id": "ch1-sec1-concepts",
+          "type": "concepts",
+          "label": "Formal Concepts",
+          "heading": "Formal Concepts & Definitions",
+          "definitions": [
+            { "term": "Function f(x)", "definition": "A rule that assigns one member of an output set to each member of an input set. A function is a mapping process that takes an input (often x) and transforms it into a specific output (often y)." },
+            { "term": "Domain", "definition": "The set of all possible valid inputs that a function can take." },
+            { "term": "Range", "definition": "The set of all possible outputs a function can produce." },
+            { "term": "Rate of Change (Slope)", "definition": "For a straight line, the rate of change is constant and is defined as the rise over run, or the change in y divided by the change in x, denoted as Δy/Δx = (y₂ - y₁)/(x₂ - x₁)." },
+            { "term": "The Limit", "definition": "The formal mathematical foundation of calculus. It describes the value that a function approaches as the input approaches some value. Calculus uses limits to transition from measuring the average slope over a macroscopic interval to finding the exact instantaneous slope." },
+            { "term": "Continuity", "definition": "A continuous function has no sudden jumps. An approximate knowledge of the input t is sufficient to find an approximate output f(t)." },
+            { "term": "Intermediate Value Theorem (IVT)", "definition": "If a function f is continuous on a closed interval [a, b], it must take on all values between f(a) and f(b)." }
+          ]
+        },
+        {
+          "id": "ch1-sec1-examples",
+          "type": "examples",
+          "label": "Examples",
+          "heading": "Step-by-Step Examples",
+          "examples": [
+            {
+              "level": "Basic",
+              "title": "Finding the Constant Rate of Change (Linear Function)",
+              "problem": "Find the slope of f(x) = x - 1",
+              "steps": [
+                "Pick any two points on this straight line, for example, (1, 0) and (4, 3).",
+                "Calculate the change in the y-coordinates (the rise): Δy = 3 - 0 = 3.",
+                "Calculate the change in the x-coordinates (the run): Δx = 4 - 1 = 3.",
+                "Divide to find the slope: m = 3/3 = 1. For every 1 unit x changes, y changes by exactly 1."
+              ],
+              "result": "m = 1"
+            },
+            {
+              "level": "Intermediate",
+              "title": "The Limit of a Function",
+              "problem": "Evaluate: lim(x→2) of (x² + 4x - 12)/(x² - 2x)",
+              "steps": [
+                "Try direct substitution. Plugging in x = 2 gives (4 + 8 - 12)/(4 - 4) = 0/0. This is undefined — use algebra.",
+                "Factor the numerator: x² + 4x - 12 = (x + 6)(x - 2).",
+                "Factor the denominator: x² - 2x = x(x - 2).",
+                "Cancel the common (x - 2) term. The reduced form is (x + 6)/x.",
+                "Apply the limit by substituting x = 2 into the simplified expression: (2 + 6)/2 = 8/2 = 4."
+              ],
+              "result": "lim = 4"
+            },
+            {
+              "level": "Advanced",
+              "title": "Applying the Intermediate Value Theorem",
+              "problem": "Show that f(x) = 4x³ - 6x² + 3x - 2 has a root between x = -1 and x = 2.",
+              "steps": [
+                "Evaluate f(-1) = 4(-1)³ - 6(-1)² + 3(-1) - 2 = -4 - 6 - 3 - 2 = -15.",
+                "Evaluate f(2) = 4(2)³ - 6(2)² + 3(2) - 2 = 32 - 24 + 6 - 2 = 12.",
+                "Since f(-1) = -15 (negative) and f(2) = 12 (positive), and polynomials are continuous functions, the IVT guarantees there must exist a point c between -1 and 2 where f(c) = 0."
+              ],
+              "result": "A root exists in (-1, 2)"
+            }
+          ]
+        },
+        {
+          "id": "ch1-sec1-visual",
+          "type": "visual",
+          "label": "Visual",
+          "heading": "Visual Understanding",
+          "graph": {
+            "type": "function",
+            "defaultExpression": "x^2 - 2*x + 1",
+            "xRange": [-2, 4],
+            "yRange": [-1, 6],
+            "label": "f(x) = x² - 2x + 1"
+          },
+          "visualNotes": [
+            "The Vertical Line Test: If a vertical line intersects the curve more than once, it is NOT a function.",
+            "Visualizing Slopes: A linear function has constant slope. A quadratic's slope changes at every point.",
+            "Area as Accumulation: The area under a velocity-time graph equals total distance traveled."
+          ]
+        },
+        {
+          "id": "ch1-sec1-code",
+          "type": "code",
+          "label": "Python",
+          "heading": "Python / Computational Section",
+          "snippets": [
+            {
+              "title": "Defining Symbols and Functions",
+              "code": "from sympy import symbols, Piecewise\nimport numpy as np\n\n# Define x as a mathematical symbol\nx = symbols('x')\n\n# Create a piecewise function\nf = Piecewise(\n    (4, x <= 0),\n    (3 - x**2, (x > 0) & (x <= 2)),\n    (2*x - 6, True)\n)\nprint(f\"f(-1) = {f.subs(x, -1)}\")\nprint(f\"f(1)  = {f.subs(x, 1)}\")\nprint(f\"f(3)  = {f.subs(x, 3)}\")"
+            },
+            {
+              "title": "Calculating Limits",
+              "code": "from sympy import symbols, limit, oo\n\nx = symbols('x')\n\n# Limit as x approaches 2\nexpression = (x**2 + 4*x - 12) / (x**2 - 2*x)\nresult = limit(expression, x, 2)\nprint(f\"lim(x->2) = {result}\")\n\n# Limit as x approaches infinity\nexp_inf = (3**x) / (3**x + 1)\nresult_inf = limit(exp_inf, x, oo)\nprint(f\"lim(x->inf) = {result_inf}\")"
+            },
+            {
+              "title": "Visualizing Functions",
+              "code": "import numpy as np\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\n\n# Generate x values\nx_vals = np.linspace(-2, 4, 200)\ny_vals = x_vals**2 - 2*x_vals + 1\n\nplt.figure(figsize=(8, 5))\nplt.plot(x_vals, y_vals, color='#8b9dc3', linewidth=2, label='f(x) = x² - 2x + 1')\nplt.axhline(0, color='#3d3a35', linewidth=0.8)\nplt.axvline(0, color='#3d3a35', linewidth=0.8)\nplt.grid(True, color='#e0dcd5', linestyle='--', alpha=0.7)\nplt.legend(fontsize=12)\nplt.title('Quadratic Function', fontsize=14)\nplt.tight_layout()\nplt.savefig('output.png', dpi=100, bbox_inches='tight')\nplt.show()\nprint('Plot saved!')"
+            }
+          ]
+        },
+        {
+          "id": "ch1-sec1-quiz",
+          "type": "quiz",
+          "label": "Quiz",
+          "heading": "Quiz",
+          "questions": [
+            {
+              "id": "q1",
+              "text": "Which of the following best describes the relationship between differentiation and integration?",
+              "options": [
+                "They are unrelated operations that solve different problems",
+                "Differentiation finds the rate of change; integration accumulates total change",
+                "Differentiation adds areas; integration finds slopes",
+                "They are both tools for solving algebraic equations"
+              ],
+              "correct": 1,
+              "explanation": "Differentiation finds the instantaneous rate of change (like velocity from position), while integration accumulates total change (like distance from velocity). They are inverse operations — the core insight of the Fundamental Theorem of Calculus."
+            },
+            {
+              "id": "q2",
+              "text": "When you substitute x = 2 into a limit expression and get 0/0, what does this mean?",
+              "options": [
+                "The limit does not exist",
+                "The answer is 0",
+                "The answer is 1",
+                "It is an indeterminate form — factor and simplify to find the actual limit"
+              ],
+              "correct": 3,
+              "explanation": "0/0 is called an indeterminate form. It does NOT mean the limit doesn't exist. It means you need to use algebra (factoring, L'Hôpital's rule) to resolve it into a definite value."
+            },
+            {
+              "id": "q3",
+              "text": "A unit circle plotted on a Cartesian plane fails the vertical line test. What does this mean?",
+              "options": [
+                "The circle has no x-intercepts",
+                "The circle is not a valid mathematical function",
+                "The circle has an undefined radius",
+                "The circle represents a discontinuous function"
+              ],
+              "correct": 1,
+              "explanation": "The vertical line test tells us if a graph is a function. A circle fails this test because a single x-value (input) maps to two y-values (outputs), violating the definition of a function."
+            },
+            {
+              "id": "q4",
+              "text": "According to the Intermediate Value Theorem, if f is continuous on [a, b] and f(a) = -5 and f(b) = 8, what can you conclude?",
+              "options": [
+                "f has a maximum at some point in [a, b]",
+                "f must equal zero somewhere in [a, b]",
+                "f is increasing throughout [a, b]",
+                "f has exactly one root in [a, b]"
+              ],
+              "correct": 1,
+              "explanation": "Since f(a) is negative and f(b) is positive, and f is continuous, the IVT guarantees f must cross zero somewhere between a and b. Note: it guarantees existence, not uniqueness — there could be multiple roots."
+            }
+          ]
+        },
+        {
+          "id": "ch1-sec1-practice",
+          "type": "practice",
+          "label": "Practice",
+          "heading": "Practice Problems",
+          "problems": [
+            {
+              "level": "Easy",
+              "label": "Concept Check",
+              "problem": "Consider the geometric shape of a standard unit circle plotted on a graph. Does this graph represent a mathematical function? Why or why not?",
+              "hint": "Apply the vertical line test.",
+              "solution": "No. A function requires every input (x-value) to map to exactly one output (y-value). If you draw a vertical line through a circle, it intersects at two points — the top and bottom — meaning one x-value produces two y-values. Therefore, the unit circle is not a function."
+            },
+            {
+              "level": "Medium",
+              "label": "Application",
+              "problem": "Evaluate: lim(x→0) of [2(x - 3)² - 18] / x",
+              "hint": "Expand the numerator first, then simplify before substituting.",
+              "solution": "Expand: 2(x-3)² - 18 = 2(x² - 6x + 9) - 18 = 2x² - 12x + 18 - 18 = 2x² - 12x. Divide by x: (2x² - 12x)/x = 2x - 12. Apply limit: 2(0) - 12 = -12."
+            },
+            {
+              "level": "Hard",
+              "label": "Thinking-Based",
+              "problem": "You drive forward at 60 mph for 2 hours, then immediately reverse at 30 mph for 2 hours. What is your total distance traveled vs. your total displacement?",
+              "hint": "Distance counts all movement; displacement is net position change (direction matters).",
+              "solution": "Total distance = 60×2 + 30×2 = 120 + 60 = 180 miles. Displacement = 60×2 - 30×2 = 120 - 60 = 60 miles from start. Distance counts everything; displacement treats backward motion as negative."
+            },
+            {
+              "level": "Real-World",
+              "label": "Economics",
+              "problem": "A restaurant has revenue R(x) = 8.99x and costs C(x) = 6.56x + 1312.13, where x is meals sold. Find the profit function P(x) and the break-even point.",
+              "hint": "Profit = Revenue - Cost. Set P(x) = 0 to find break-even.",
+              "solution": "P(x) = 8.99x - (6.56x + 1312.13) = 2.43x - 1312.13. Break-even: 0 = 2.43x - 1312.13 → x = 1312.13/2.43 ≈ 540 meals."
+            }
+          ]
+        },
+        {
+          "id": "ch1-sec1-mistakes",
+          "type": "mistakes",
+          "label": "Common Mistakes",
+          "heading": "Common Mistakes & Misconceptions",
+          "mistakes": [
+            {
+              "title": "Confusing Average vs. Instantaneous Change",
+              "description": "A major trap is trying to find the instantaneous slope at a single point by evaluating Δy/Δx directly at that point, which results in 0/0. To find an instantaneous rate, you must use the limit process as the interval approaches zero."
+            },
+            {
+              "title": "The 'Undefined' Trap in Limits",
+              "description": "Students frequently assume that if plugging a number into a limit gives 0/0, the limit simply does not exist. In calculus, 0/0 is an indeterminate form which often resolves to a perfectly valid answer via algebraic factoring and cancellation."
+            },
+            {
+              "title": "Discontinuities",
+              "description": "Attempting to evaluate limits or apply theorems across a gap in a function. For a limit to exist, the left-hand limit and right-hand limit must match. If they don't, the function is discontinuous at that point, and the general limit is nonexistent."
+            }
+          ]
+        },
+        {
+          "id": "ch1-sec1-advanced",
+          "type": "advanced",
+          "label": "Advanced Insights",
+          "heading": "Advanced Insights",
+          "insights": [
+            {
+              "title": "The Power of the Intermediate Value Theorem (IVT)",
+              "body": "While the IVT seems like common sense (if you travel continuously from A to B, you must pass through every point in between), it is the backbone of computational algorithms. It mathematically guarantees the existence of solutions (roots) to complex equations without us needing to know exactly what the solution is. This is the foundation of computer search algorithms like the bisection method."
+            },
+            {
+              "title": "Calculus vs. Algebra",
+              "body": "Algebra operates strictly on discrete, finite differences (x₂ - x₁). Calculus was invented because the universe is continuous. The profoundly advanced step of calculus is 'going to the limit' — transitioning from adding up finite changes to dealing with infinitely many infinitesimals."
+            }
+          ]
+        },
+        {
+          "id": "ch1-sec1-applications",
+          "type": "applications",
+          "label": "Real-World",
+          "heading": "Real-World Applications",
+          "applications": [
+            {
+              "field": "Physics (Kinematics)",
+              "description": "Translating an object's distance history directly into its exact velocity at any given second, or moving from an acceleration profile (like a falling object under gravity) to its speed and position."
+            },
+            {
+              "field": "Economics & Optimization",
+              "description": "Finding specific break-even points where revenues exactly balance out costs. Calculus is used heavily to find marginal cost (the cost of producing one additional unit), which is simply the rate of change of the total cost function."
+            },
+            {
+              "field": "Data Science / Machine Learning",
+              "description": "Analyzing continuous data streams to identify trends. For instance, creating a mathematical function out of historical global temperature anomalies, then computing its rate of change to establish exactly how fast the Earth is warming at any specific moment."
+            },
+            {
+              "field": "Engineering Systems",
+              "description": "Understanding proportional forces—such as Hooke's Law which dictates the changing force exerted by a spring as its displacement changes—before engineering more complex, nonlinear mechanical systems."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
